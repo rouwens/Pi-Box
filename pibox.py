@@ -12,6 +12,9 @@ def exit ():
 def timer ():
     time.sleep(2)
 
+def dir ():
+    os.system ("cd /opt/Pi-Box/")
+
 #Het start menu
 def start ():
     print ("#   _______  ___     _______  _______  __   __ ")
@@ -129,6 +132,7 @@ def software_install():
         print ("Do you want to continue? (y/n")
         answer = input()
         if answer == "y":
+            dir()
             os.system ("bash ./scripts/install/LAMP.bash")
             print ("LAMP stack is installed")
             timer()

@@ -71,10 +71,10 @@ def software():
     choice = input()
 
     if choice == "1":
-        webserver()
+        print()
     
     elif choice == "2":
-        print () 
+        webserver () 
 
     elif choice == "3":
         print ()

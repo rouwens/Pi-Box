@@ -123,7 +123,9 @@ def webserver():
     choice = input()
 
     if choice == "1":
+        print ()
         os.system ("ls /var/www/html")
+        input("Press Enter to continue...")
         return webserver()
        
     elif choice == "2":
@@ -213,9 +215,16 @@ def webapps ():
         print ("Wordpress is installed.")
         print ("In a webbrowser go to http://"+ip+"/"+folder)
         print ("At the database secion use the following.")
-        print ("")
+        print ()
+        print ("Database Name: wordpress")
+        print ("Username: wordpress")
+        print ("Password: welcome01")
+        print ("Database Host: localhost")
+        print ("Table Prefix: (Anything you like)") 
+        print ()
         timer
         return webapps
+
 
     elif choice == "2":    
         print ()

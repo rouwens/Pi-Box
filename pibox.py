@@ -6,12 +6,15 @@ import os
 
 # Het standaard riegeltje wanneer het programma moet stoppen
 def exit ():
+    print ()
     print ("Bye, bye")
     time.sleep(2)
 
+# Standaard tijd om te wachten tussen print regels
 def timer ():
     time.sleep(2)
 
+# Map waar die standaard heen moet (voor de zekerheid)
 def dir ():
     os.system ("cd /opt/Pi-Box/")
 
@@ -71,8 +74,8 @@ def software():
         webserver()
     
     elif choice == "2":
-        software_install()
-    
+        print () 
+
     elif choice == "3":
         print ()
     
@@ -94,7 +97,7 @@ def software():
         time.sleep(2)
         return software()
 
-
+# Het menu van de webserver
 def webserver():
     print ()
     print ("Webserver")
@@ -120,16 +123,16 @@ def webserver():
         os.system ("ls /var/www/root")
         return webserver()
        
-    if choice == "2":
-        webtools()
+    elif choice == "2":
+        print ()
 
-    if choice == ("3"):
+    elif choice == ("3"):
         return software()
     
-    if choice == ("4"):
+    elif choice == ("4"):
         exit()
     
-    if choice == ("install"):
+    elif choice == ("install"):
         dir()
         os.system ("./scripts/install/LAMP.bash")
         timer()

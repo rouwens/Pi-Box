@@ -58,8 +58,8 @@ def software():
     print ("----------")
     print ()
     print ("1 - View installed/running software")
-    print ("2 - Install software")
-    print ("3 - Manage software")
+    print ("2 - Webserver")
+    print ("3 - Adguard Home (Adblocker)")
     print ("4 - Remove software")
     print ("5 - Update system")
     print ("")
@@ -68,7 +68,7 @@ def software():
     choice = input()
 
     if choice == "1":
-        software_installed()
+        webserver()
     
     elif choice == "2":
         software_install()
@@ -94,64 +94,51 @@ def software():
         time.sleep(2)
         return software()
 
-# Laat software zien dat op het systeem is geinstalleerd       
-def software_installed():
-    apache2 = os.system('echo 3 | systemctl status apache2 >/dev/null 2>&1')
-    apache2stat = 123
 
-    if apache2 == 0:
-        apache2stat = Fore.GREEN + "Running"
-
-    elif apache2 == "1024":
-        apache2stat = Fore.BLACK + "Not installed"
-
-    else:
-        apache2stat = Fore.RED + "Not running"
-    print (apache2stat)
+def webserver():
     print ()
-    print ("Software - Installed/running")
-    print ("---------------------")
-    print ()
-    print ("Webserver  " + apache2stat + Style.RESET_ALL)
-    print ("Adblocker")
-
-def software_install():
-    print ()
-    print ("Software - Install")
-    print ("------------------") 
-    print ("1 - Webserver")
-    print ("2 - Adblocker")
+    print ("Webserver")
+    print ("------------------")
+    print ("Status:")
+    print () 
+    print ("1 - List directory")
+    print ("2 - Install web applications")
     print ()
     print ("3 - Return")
     print ("4 - Exit")
+
+    # Checken of de map bestaat
+    check = os.path.isdir('/etc/apache2')
+
+    if check != True:
+        print ()
+        print ("The webserver is not installed. Enter install to begin the installation")
+
     choice = input()
 
     if choice == "1":
-        print ()
-        print ("This will install the full Linux Apache2 Mariadb PHP (LAMP) stack")
-        print ("Do you want to continue? (y/n")
-        answer = input()
-        if answer == "y":
-            dir()
-            os.system ("bash ./scripts/install/LAMP.bash")
-            print ("LAMP stack is installed")
-            timer()
-            return software_install()
-        elif answer == "n":
-            return software_install()
-        else:
-            print ()
-            print ("Unknow input. Please try again...")
-            timer()
-            return software_install()
-    
+        os.system ("ls /var/www/root")
+        return webserver()
+       
     if choice == "2":
-        adblocker()
-    
+        webtools()
+
     if choice == ("3"):
         return software()
     
     if choice == ("4"):
         exit()
+    
+    if choice == ("install"):
+        dir()
+        os.system ("./scripts/install/LAMP.bash")
+        timer()
+        return webserver()
+    
+    else:
+        print ()
+        print ("Input not reconized. Please try agian...")
+        timer()
+        return webserver()
     
 start()

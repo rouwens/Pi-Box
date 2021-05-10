@@ -1,0 +1,18 @@
+    if choice == "1":
+        print ()
+        print ("This will install the full Linux Apache2 Mariadb PHP (LAMP) stack")
+        print ("Do you want to continue? (y/n")
+        answer = input()
+        if answer == "y":
+            dir()
+            os.system ("bash ./scripts/install/LAMP.bash")
+            print ("LAMP stack is installed")
+            timer()
+            return webserver()
+        elif answer == "n":
+            return webserver()
+        else:
+            print ()
+            print ("Unknow input. Please try again...")
+            timer()
+            return webserver()

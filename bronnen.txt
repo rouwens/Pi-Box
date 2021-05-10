@@ -2,3 +2,5 @@ Gekleurde tekst printen - https://stackoverflow.com/questions/39473297/how-do-i-
 Checken of systeem service draait of niet - https://stackoverflow.com/questions/46579170/python-code-to-check-if-service-is-running-or-not
 os system output verbergen - https://stackoverflow.com/questions/33985863/hiding-console-output-produced-by-os-system
 Check of map bestaat - https://stackoverflow.com/questions/8933237/how-to-find-if-directory-exists-in-python
+os system python variabel meegeven - https://www.daniweb.com/programming/software-development/threads/283029/how-to-use-variables-in-os-system
+IP adres verkrijgen - https://www.w3resource.com/python-exercises/python-basic-exercise-55.php

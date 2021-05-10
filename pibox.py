@@ -1,5 +1,5 @@
 import time
-import colorama
+import socket
 from colorama import Fore, Style
 import os
 
@@ -127,7 +127,7 @@ def webserver():
         return webserver()
        
     elif choice == "2":
-        print ()
+        webapps()
     
     elif choice == "3":
         print()
@@ -150,5 +150,97 @@ def webserver():
         print ("Input not reconized. Please try agian...")
         timer()
         return webserver()
-    
+
+def webapps ():
+    print ()
+    print ("WebApps")
+    print ("-------")
+    print ("Select an app that you want to install")
+    print ("")
+    print ("1 - Worpress")
+    print ("2 - Joomla")
+    print ("3 - Drupal")
+    print ("4 - Owncloud")
+    print ("5 - Nextcloud")
+    print ("6 - Shifexec")
+    print ("7 - PhpMyadmin")
+    print ()
+    print ("8 - Return")
+    print ("9 - Exit")
+    choice = input()
+
+    if choice == "1":
+        location = "empty"
+        print()
+        print ("What is the name of the folder where you are goining to install wordpress? Use . to install it in to the root folder.")
+        folder = input()
+        
+        if folder == ".":
+            location = "/var/www/html"
+
+        else:
+            location = "/var/www/html/" + folder
+        
+        foldercheck = os.path.isdir('/etc/apache2')
+
+        if foldercheck == True:
+            print ()
+            print ("Folder is not empty. Continue anyway? (y/n)")
+            proceed = input()
+
+            if proceed == "y" or "yes":
+                os.system ("rm -r " +location)
+            
+            elif proceed == "n" or "no":
+                print ()
+                print ("Nothing is removed. Please try agian.")
+                timer
+                return webapps()
+
+            else:
+                print ("Nothing is removed. Please try agian.")
+                timer
+                return webapps()                         
+        dir()
+        os.system ("./scripts/install/LAMP.bash")
+        os.system ("./scripts/install/wordpress.bash %s"%location)
+        print ()
+        ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] 
+        if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), 
+        s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, 
+        socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
+
+        print ("Wordpress is installed.")
+        print ("In a webbrowser go to http://"+ip+"/"+folder)
+        print ("At the database secion use the following.")
+        print ("")
+        timer
+        return webapps
+
+    elif choice == "2":    
+        print ()
+
+    elif choice == "3":    
+        print ()
+
+    elif choice == "4":    
+        print ()
+
+    elif choice == "5":    
+        print ()
+
+    elif choice == "6":    
+        print ()
+
+    elif choice == "7":    
+        print ()
+
+    elif choice == "8":    
+        print ()
+
+    else:
+        print ()
+        print ("Choice not reconized. Please try again...")
+        timer()
+        return webapps()        
 start()

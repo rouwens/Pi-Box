@@ -99,42 +99,49 @@ def software():
 
 # Het menu van de webserver
 def webserver():
-    print ()
-    print ("Webserver")
-    print ("------------------")
-    print ("Status:")
-    print () 
-    print ("1 - List directory")
-    print ("2 - Install web applications")
-    print ()
-    print ("3 - Return")
-    print ("4 - Exit")
-
+    status = "empty"
     # Checken of de map bestaat
     check = os.path.isdir('/etc/apache2')
 
     if check != True:
         print ()
         print ("The webserver is not installed. Enter install to begin the installation")
+        status = Fore.WHITE + "not installed" + Style.RESET_ALL
+
+    print ()
+    print ("Webserver")
+    print ("------------------")
+    print ("Status: "+ status)
+    print () 
+    print ("1 - List directory")
+    print ("2 - Web applications")
+    print ("3 - Settings")
+    print ()
+    print ("4 - Return")
+    print ("5 - Exit")
 
     choice = input()
 
     if choice == "1":
-        os.system ("ls /var/www/root")
+        os.system ("ls /var/www/html")
         return webserver()
        
     elif choice == "2":
         print ()
+    
+    elif choice == "3":
+        print()
 
-    elif choice == ("3"):
+    elif choice == ("4"):
         return software()
     
-    elif choice == ("4"):
+    elif choice == ("5"):
         exit()
     
     elif choice == ("install"):
-        dir()
-        os.system ("./scripts/install/LAMP.bash")
+        os.system ("apt update -y && apt install apache2 -y")
+        print ()
+        print ("De webserver is installed")
         timer()
         return webserver()
     

@@ -1,0 +1,5 @@
+Dependicies
+
+Python3
+Python3 - pip
+pip3 colorma

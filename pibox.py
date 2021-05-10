@@ -181,7 +181,7 @@ def webapps ():
         else:
             location = "/var/www/html/" + folder
         
-        foldercheck = os.path.isdir('/etc/apache2')
+        foldercheck = os.path.isdir('/var/www/html/'+folder)
 
         if foldercheck == True:
             print ()

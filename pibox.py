@@ -9,6 +9,9 @@ def exit ():
     print ("Bye, bye")
     time.sleep(2)
 
+def timer ():
+    time.sleep(2)
+
 #Het start menu
 def start ():
     print ("#   _______  ___     _______  _______  __   __ ")
@@ -126,15 +129,16 @@ def software_install():
         print ("Do you want to continue? (y/n")
         answer = input()
         if answer == "y":
-            print ("Installing LAMP")
+            os.system ("bash ./scripts/install/LAMP.bash")
             print ("LAMP stack is installed")
+            timer()
             return software_install()
         elif answer == "n":
             return software_install()
         else:
             print ()
             print ("Unknow input. Please try again...")
-            time.sleep(2)
+            timer()
             return software_install()
     
     if choice == "2":

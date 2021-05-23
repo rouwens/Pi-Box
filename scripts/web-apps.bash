@@ -81,8 +81,7 @@ if [ "$cms" == "shiftexec" ]; then
     mkdir $2 
     cd $2
     apt install zip -y
-    wget http://www.shiftexec.com/shiftexec-latest.zip
-    unzip shiftexec-latest.zip
+    wget http://www.shiftexec.com/shiftexec-latest.zip && unzip shiftexec-latest.zip
     cd ../
     chmod 0777 -R $2
     mysql -e "create database shiftexec"

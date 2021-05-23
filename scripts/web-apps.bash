@@ -44,7 +44,7 @@ if [ "$cms" == "drupal" ]; then
     mysql -e "GRANT ALL PRIVILEGES ON drupal.* TO 'drupal'@'localhost';"
     mysql -e "FLUSH PRIVILEGES;"
     cd $2/sites/default/
-    mv default.settings.php settings.php
+    cp default.settings.php settings.php
     cd /var/www/html
     chmod 0777 -R $2
 fi

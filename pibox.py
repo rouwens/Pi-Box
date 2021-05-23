@@ -225,8 +225,7 @@ def webapps ():
         print ("Table Prefix: (Anything you like)") 
         print ()
         timer
-        return webapps
-
+        return webapps ()
 
     elif choice == "2":    
         location = "empty"
@@ -282,7 +281,7 @@ def webapps ():
         print ("Table Prefix: (Anything you like)") 
         print ()
         timer
-        return webapps
+        return webapps() 
 
     elif choice == "3":    
         location = "empty"
@@ -338,8 +337,7 @@ def webapps ():
         print ("Table Prefix: (Anything you like)") 
         print ()
         timer
-        return webapps
-
+        return webapps() 
 
     elif choice == "4":    
         print ()

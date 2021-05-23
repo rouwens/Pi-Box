@@ -4,5 +4,5 @@ os system output verbergen - https://stackoverflow.com/questions/33985863/hiding
 Check of map bestaat - https://stackoverflow.com/questions/8933237/how-to-find-if-directory-exists-in-python
 os system python variabel meegeven - https://www.daniweb.com/programming/software-development/threads/283029/how-to-use-variables-in-os-system
 IP adres verkrijgen - https://www.w3resource.com/python-exercises/python-basic-exercise-55.php
-
+Tekst in een tekst vervangen - https://pythonexamples.org/python-replace-string-in-file/
 Mysql command vanuit CLI - https://electrictoolbox.com/run-single-mysql-query-command-line/

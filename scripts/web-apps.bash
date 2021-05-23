@@ -77,7 +77,16 @@ if [ "$cms" == "nextcloud" ]; then
 fi
 
 if [ "$cms" == "shiftexec" ]; then
-    echo "Test"
+    cd /var/www/html
+    mkdir $2 
+    cd $2
+    wget http://www.shiftexec.com/shiftexec-latest.zip
+    cd ../
+    chmod 0777 -R $2
+    mysql -e "create database shiftexec"
+    mysql -e "CREATE USER 'shiftexec'@'localhost' IDENTIFIED BY 'welcome01';"
+    mysql -e "GRANT ALL PRIVILEGES ON shiftexec.* TO 'shiftexec'@'localhost';"
+    mysql -e "FLUSH PRIVILEGES;"
     
 fi
 

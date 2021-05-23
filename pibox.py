@@ -486,10 +486,21 @@ def webapps ():
         s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, 
         socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
 
-        print ("Nextcloud is installed.")
+        username = "shiftexec"
+        password = "welcome01"
+        config_location = location + "/config.rename_it.php"
+        config_location_new = location + "/config.php"
+        fin = open(config_location, "rt")
+        fout = open(config_location_new, "wt")
+        for line in fin:
+            fout.write(line.replace('my_username', username))
+        for line in fin:
+            fout.write(line.replace('my_password', password))
+        fin.close()
+        fout.close()
+
+        print ("Shiftexec is installed.")
         print ("In a webbrowser go to http://"+ip+"/"+folder)
-        print ()
-        print ()
         timer
         return webapps() 
 

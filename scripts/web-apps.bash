@@ -59,6 +59,7 @@ if [ "$cms" == "owncloud" ]; then
     mysql -e "create database owncloud"
     mysql -e "CREATE USER 'owncloud'@'localhost' IDENTIFIED BY 'welcome01';"
     mysql -e "GRANT ALL PRIVILEGES ON owncloud.* TO 'owncloud'@'localhost';"
+    mysql -e "GRANT GRANT OPTION ON owncloud.* TO 'owncloud'@'localhost';"
     mysql -e "FLUSH PRIVILEGES;"
 fi
 
@@ -73,6 +74,7 @@ if [ "$cms" == "nextcloud" ]; then
     mysql -e "create database nextcloud"
     mysql -e "CREATE USER 'nextcloud'@'localhost' IDENTIFIED BY 'welcome01';"
     mysql -e "GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost';"
+    mysql -e "GRANT GRANT OPTION ON nextcloud.* TO 'nextcloud'@'localhost';"
     mysql -e "FLUSH PRIVILEGES;"
 fi
 

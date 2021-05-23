@@ -15,6 +15,7 @@ if [ "$cms" == "wordpress" ]; then
     mysql -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost';"
     mysql -e "FLUSH PRIVILEGES;"
     chmod 0777 -R $2
+    systemctl restart apache2
 fi
 
 if [ "$cms" == "joomla" ]; then
@@ -31,6 +32,7 @@ if [ "$cms" == "joomla" ]; then
     mysql -e "FLUSH PRIVILEGES;"
     cd ../
     chmod 0777 -R $2
+    systemctl restart apache2
 fi
 
 if [ "$cms" == "drupal" ]; then
@@ -47,6 +49,7 @@ if [ "$cms" == "drupal" ]; then
     cp default.settings.php settings.php
     cd /var/www/html
     chmod 0777 -R $2
+    systemctl restart apache2
 fi
 
 if [ "$cms" == "owncloud" ]; then
@@ -62,6 +65,7 @@ if [ "$cms" == "owncloud" ]; then
     mysql -e "GRANT ALL PRIVILEGES ON owncloud.* TO 'owncloud'@'localhost';"
     mysql -e "GRANT GRANT OPTION ON owncloud.* TO 'owncloud'@'localhost';"
     mysql -e "FLUSH PRIVILEGES;"
+    systemctl restart apache2
 fi
 
 if [ "$cms" == "nextcloud" ]; then
@@ -77,6 +81,7 @@ if [ "$cms" == "nextcloud" ]; then
     mysql -e "GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost';"
     mysql -e "GRANT GRANT OPTION ON nextcloud.* TO 'nextcloud'@'localhost';"
     mysql -e "FLUSH PRIVILEGES;"
+    systemctl restart apache2
 fi
 
 if [ "$cms" == "shiftexec" ]; then
@@ -91,6 +96,7 @@ if [ "$cms" == "shiftexec" ]; then
     mysql -e "CREATE USER 'shiftexec'@'localhost' IDENTIFIED BY 'welcome01';"
     mysql -e "GRANT ALL PRIVILEGES ON shiftexec.* TO 'shiftexec'@'localhost';"
     mysql -e "FLUSH PRIVILEGES;"
+    systemctl restart apache2
     
 fi
 
@@ -101,4 +107,5 @@ if [ "$cms" == "phpmyadmin" ]; then
     unzip phpMyAdmin-5.1.0-all-languages.zip
     rm phpMyAdmin-5.1.0-all-languages.zip
     mv phpMyAdmin-5.1.0-all-languages $2
+    systemctl restart apache2
 fi

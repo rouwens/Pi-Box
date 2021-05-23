@@ -115,10 +115,11 @@ def webserver():
     print () 
     print ("1 - List web directory")
     print ("2 - Web applications")
-    print ("3 - Settings")
+    print ("3 - Remove webapplication")
+    print ("4 - Settings")
     print ()
-    print ("4 - Return")
-    print ("5 - Exit")
+    print ("5 - Return")
+    print ("6 - Exit")
 
     choice = input()
 
@@ -132,12 +133,43 @@ def webserver():
         webapps()
     
     elif choice == "3":
-        print()
+        print ("What's the name of the folder that you want to remove? A . stands for everything.")
+        folder = input ()
 
-    elif choice == ("4"):
+        if folder == ".":
+            print ("Are you sure? (y/n)")
+            choice = input()
+
+            if choice == "y":
+                os.system ("rm -r /var/www/html/*")
+                print ("Everything is removed...")
+                timer
+            else:
+                print ("Nothing is changed...")
+                timer
+            return webserver ()
+        
+        print ("Are you sure that you want to remove " + folder + "? (y/n)")
+        choice = input()
+
+        if choice == "y":
+            os.system ("rm -r /var/www/html" +folder)
+            print ("The folder is removed...")
+            timer
+            return webserver()
+        else:
+            print ("Operation cancceld...")
+            timer
+            return webserver()
+
+    
+    elif choice == "4":
+        websettings ()
+
+    elif choice == ("5"):
         return software()
     
-    elif choice == ("5"):
+    elif choice == ("6"):
         exit()
     
     elif choice == ("install"):
@@ -152,6 +184,55 @@ def webserver():
         print ("Input not reconized. Please try agian...")
         timer()
         return webserver()
+
+def websettings ():
+    print ()
+    print ("Websettings")
+    print ("-----------")
+    print ("1 - Start service")
+    print ("2 - Restart service")
+    print ("3 - Stop service")
+    print ()
+    print ("5 - Change webserver port")
+    print ("6 - HTTPS")
+    print ("7 - Uninstall")
+    print ()
+    print ("8 - Return")
+    choice = input()
+
+    if choice == "1":
+        os.system ("systemctl start apache2")
+        print ("The webserver is starting...")
+        timer
+        websettings ()
+    
+    elif choice == "2":
+        os.system ("systemctl restart apache2")
+        print ("The webserver is restarting...")
+        timer
+        websettings ()
+    
+    elif choice == "3":
+        print ()
+    
+    elif choice == "4":
+        print ()
+    
+    elif choice == "5":
+        print ()
+    
+    elif choice == "6":
+        print ()
+    
+    elif choice == "7":
+        print ()
+    
+    elif choice == "8":
+        print ()
+
+
+    
+
 
 def webapps ():
     print ()
@@ -174,7 +255,7 @@ def webapps ():
     if choice == "1":
         location = "empty"
         print()
-        print ("What is the name of the folder where you are goining to install wordpress? Use . to install it in to the root folder of the webserver.")
+        print ("What is the name of the folder where you are goining to install Wordpress? Use . to install it in to the root folder of the webserver.")
         folder = input()
         
         if folder == ".":
@@ -230,7 +311,7 @@ def webapps ():
     elif choice == "2":    
         location = "empty"
         print()
-        print ("What is the name of the folder where you are goining to install wordpress? Use . to install it in to the root folder of the webserver.")
+        print ("What is the name of the folder where you are goining to install Joomla? Use . to install it in to the root folder of the webserver.")
         folder = input()
         
         if folder == ".":
@@ -286,7 +367,7 @@ def webapps ():
     elif choice == "3":    
         location = "empty"
         print()
-        print ("What is the name of the folder where you are goining to install wordpress? Use . to install it in to the root folder of the webserver.")
+        print ("What is the name of the folder where you are goining to install Drupal? Use . to install it in to the root folder of the webserver.")
         folder = input()
         
         if folder == ".":
@@ -340,7 +421,7 @@ def webapps ():
     elif choice == "4":    
         location = "empty"
         print()
-        print ("What is the name of the folder where you are goining to install wordpress? Use . to install it in to the root folder of the webserver.")
+        print ("What is the name of the folder where you are goining to install Owncloud? Use . to install it in to the root folder of the webserver.")
         folder = input()
         
         if folder == ".":
@@ -382,19 +463,20 @@ def webapps ():
 
         print ("Owncloud is installed.")
         print ("In a webbrowser go to http://"+ip+"/"+folder)
+        print ()
+        print ("You don't have to change the datafolder.")
         print ("At the database secion use the following.")
         print ()
-        print ("Database name: drupal")
-        print ("Database username: drupal")
-        print ("Database password")
-        print ()
+        print ("User database: owncloud")
+        print ("Password database: welcome01")
+        print ("Name database: owncloud")
         timer
         return webapps() 
 
     elif choice == "5":    
         location = "empty"
         print()
-        print ("What is the name of the folder where you are goining to install wordpress? Use . to install it in to the root folder of the webserver.")
+        print ("What is the name of the folder where you are goining to install Nextcloud? Use . to install it in to the root folder of the webserver.")
         folder = input()
         
         if folder == ".":

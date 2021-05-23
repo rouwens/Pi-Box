@@ -113,7 +113,7 @@ def webserver():
     print ("------------------")
     print ("Status: "+ status)
     print () 
-    print ("1 - List directory")
+    print ("1 - List web directory")
     print ("2 - Web applications")
     print ("3 - Settings")
     print ()
@@ -174,7 +174,7 @@ def webapps ():
     if choice == "1":
         location = "empty"
         print()
-        print ("What is the name of the folder where you are goining to install wordpress? Use . to install it in to the root folder.")
+        print ("What is the name of the folder where you are goining to install wordpress? Use . to install it in to the root folder of the webserver.")
         folder = input()
         
         if folder == ".":
@@ -187,7 +187,7 @@ def webapps ():
 
         if foldercheck == True:
             print ()
-            print ("Folder is not empty. Continue anyway? (y/n)")
+            print ("Folder is not empty. If you proceed than the target folder will be removed. (y/n)")
             proceed = input()
 
             if proceed == "y" or "yes":

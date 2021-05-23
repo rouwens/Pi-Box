@@ -65,7 +65,7 @@ fi
 
 if [ "$cms" == "nextcloud" ]; then
     cd /var/www/html
-    mkidr $2
+    mkdir $2
     cd $2
     wget https://download.nextcloud.com/server/installer/setup-nextcloud.php
     mv setup-nextcloud.php setup.php

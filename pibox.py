@@ -494,6 +494,13 @@ def webapps ():
         fout = open(config_location_new, "wt")
         for line in fin:
             fout.write(line.replace('my_username', username))
+        fin.close()
+        fout.close()
+
+        config_location = location + "/config.php"
+        config_location_new = location + "/config.php"
+        fin = open(config_location, "rt")
+        fout = open(config_location_new, "wt")
         for line in fin:
             fout.write(line.replace('my_password', password))
         fin.close()

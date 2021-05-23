@@ -206,7 +206,7 @@ def webapps ():
         cms = "wordpress"
         dir()
         os.system ("./scripts/install/LAMP.bash")
-        cmd = "./scripts/web-apps.bash -%s -%s"%(cms, location)
+        cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
         os.system(cmd)
         print ()
         ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] 

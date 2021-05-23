@@ -203,9 +203,10 @@ def webapps ():
                 print ("Nothing is removed. Please try agian.")
                 timer
                 return webapps()                         
+        cms = "wordpress"
         dir()
         os.system ("./scripts/install/LAMP.bash")
-        os.system ("./scripts/install/wordpress.bash %s"%location)
+        os.system ("./scripts/web-apps.bash %s %s"%cms, location)
         print ()
         ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] 
         if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), 

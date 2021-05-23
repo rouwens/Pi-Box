@@ -153,7 +153,7 @@ def webserver():
         choice = input()
 
         if choice == "y":
-            os.system ("rm -r /var/www/html" +folder)
+            os.system ("rm -r /var/www/html/" +folder)
             print ("The folder is removed...")
             timer
             return webserver()

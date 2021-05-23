@@ -260,7 +260,7 @@ def webapps ():
                 print ("Nothing is removed. Please try agian.")
                 timer
                 return webapps()                         
-        cms = "wordpress"
+        cms = "joomla"
         dir()
         os.system ("./scripts/install/LAMP.bash")
         cmd = "./scripts/web-apps.bash %s %s"%(cms, location)

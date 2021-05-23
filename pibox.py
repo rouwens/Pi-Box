@@ -489,7 +489,7 @@ def webapps ():
         username = "shiftexec"
         password = "welcome01"
         config_location = location + "/config.rename_it.php"
-        config_location_new = location + "/config.php"
+        config_location_new = location + "/config.temp"
         fin = open(config_location, "rt")
         fout = open(config_location_new, "wt")
         for line in fin:
@@ -497,7 +497,7 @@ def webapps ():
         fin.close()
         fout.close()
 
-        config_location = location + "/config.php"
+        config_location = location + "/config.temp"
         config_location_new = location + "/config.php"
         fin = open(config_location, "rt")
         fout = open(config_location_new, "wt")

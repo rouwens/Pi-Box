@@ -51,11 +51,12 @@ fi
 
 if [ "$cms" == "owncloud" ]; then
     cd /var/www/html
-    wget https://download.owncloud.org/community/owncloud-complete-20210326.tar.bz2
-    tar xzf owncloud-complete-20210326.tar.bz2
+    apt install zip -y
+    wget https://download.owncloud.org/community/owncloud-complete-20210326.zip
+    unzip owncloud-complete-20210326.zip
     mv owncloud $2
     chmod 0777 -R $2
-    rm owncloud-complete-20210326.tar.bz2
+    rm owncloud-complete-20210326.zip
     mysql -e "create database owncloud"
     mysql -e "CREATE USER 'owncloud'@'localhost' IDENTIFIED BY 'welcome01';"
     mysql -e "GRANT ALL PRIVILEGES ON owncloud.* TO 'owncloud'@'localhost';"

@@ -437,16 +437,20 @@ def webapps ():
         print ("Nextcloud is installed.")
         print ("In a webbrowser go to http://"+ip+"/"+folder+"/setup.php")
         print ("For the install directory enter a . to install it")
+        print ()
+        print ("You don't have to change the datafolder.")
         print ("At the database secion use the following.")
         print ()
-        print ()
+        print ("User database: nextcloud")
+        print ("Password database: welcome01")
+        print ("Name database: nextcloud")
         timer
         return webapps() 
 
     elif choice == "6":    
         location = "empty"
         print()
-        print ("What is the name of the folder where you are goining to install wordpress? Use . to install it in to the root folder of the webserver.")
+        print ("What is the name of the folder where you are goining to install Shiftexec? Use . to install it in to the root folder of the webserver.")
         folder = input()
         
         if folder == ".":
@@ -514,7 +518,7 @@ def webapps ():
     elif choice == "7":    
         location = "empty"
         print()
-        print ("What is the name of the folder where you are goining to install wordpress? Use . to install it in to the root folder of the webserver.")
+        print ("What is the name of the folder where you are goining to install phpMyAdmin? Use . to install it in to the root folder of the webserver.")
         folder = input()
         
         if folder == ".":

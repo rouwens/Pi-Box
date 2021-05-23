@@ -18,5 +18,17 @@ if [ "$cms" == "wordpress" ]; then
 fi
 
 if [ "$cms" == "joomla" ]; then
-    echo "Joomla installed"
+    cd /var/www/html
+    apt install zip -y
+    mkdir $2
+    cd $2
+    wget https://downloads.joomla.org/cms/joomla3/3-9-26/Joomla_3-9-26-Stable-Full_Package.zip
+    unzip Joomla_3-9-26-Stable-Full_Package.zip
+    rm Joomla_3-9-26-Stable-Full_Package.zip
+    mysql -e "create database joomla"
+    mysql -e "CREATE USER 'joomla'@'localhost' IDENTIFIED BY 'welcome01';"
+    mysql -e "GRANT ALL PRIVILEGES ON joomla.* TO 'joomla'@'localhost';"
+    mysql -e "FLUSH PRIVILEGES;"
+    cd ../
+    chmod 0777 -R $2
 fi

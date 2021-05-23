@@ -32,3 +32,17 @@ if [ "$cms" == "joomla" ]; then
     cd ../
     chmod 0777 -R $2
 fi
+
+if [ "$cms" == "drupal" ]; then
+    cd /var/www/html
+    wget https://www.drupal.org/download-latest/tar.gz
+    tar xzf tar.gz 
+    mv drupal-* $2
+    rm tar.gz
+    mysql -e "create database drupal"
+    mysql -e "CREATE USER 'drupal'@'localhost' IDENTIFIED BY 'welcome01';"
+    mysql -e "GRANT ALL PRIVILEGES ON drupal.* TO 'drupal'@'localhost';"
+    mysql -e "FLUSH PRIVILEGES;"
+    chmod 0777 -R $2
+fi
+

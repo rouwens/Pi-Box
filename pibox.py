@@ -566,6 +566,8 @@ def webapps ():
     elif choice == "8":    
         return webserver ()
 
+    elif choice == "9":
+        exit()
     else:
         print ()
         print ("Choice not reconized. Please try again...")

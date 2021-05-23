@@ -77,6 +77,7 @@ if [ "$cms" == "nextcloud" ]; then
 fi
 
 if [ "$cms" == "shiftexec" ]; then
+    echo "Test"
     
 fi
 

@@ -10,4 +10,4 @@ mysql -e "create database wordpress"
 mysql -e "CREATE USER 'wordpress'@'localhost' IDENTIFIED BY 'welcome01';"
 mysql -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost';"
 mysql -e "FLUSH PRIVILEGES;"
-chmod 0777 -R /var/www/html/$1/
+chmod 0777 -R $1

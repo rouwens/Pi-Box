@@ -49,3 +49,42 @@ if [ "$cms" == "drupal" ]; then
     chmod 0777 -R $2
 fi
 
+if [ "$cms" == "owncloud" ]; then
+    cd /var/www/html
+    wget https://download.owncloud.org/community/owncloud-complete-20210326.tar.bz2
+    tar xzf https://download.owncloud.org/community/owncloud-complete-20210326.tar.bz2
+    mv owncloud $2
+    chmod 0777 -R $2
+    rm owncloud-complete-20210326.tar.bz2
+    mysql -e "create database owncloud"
+    mysql -e "CREATE USER 'owncloud'@'localhost' IDENTIFIED BY 'welcome01';"
+    mysql -e "GRANT ALL PRIVILEGES ON owncloud.* TO 'owncloud'@'localhost';"
+    mysql -e "FLUSH PRIVILEGES;"
+fi
+
+if [ "$cms" == "nextcloud" ]; then
+    cd /var/www/html
+    mkidr $2
+    cd $2
+    wget https://download.nextcloud.com/server/installer/setup-nextcloud.php
+    mv setup-nextcloud.php setup.php
+    cd ../
+    chmod 0777 -R $2
+    mysql -e "create database nextcloud"
+    mysql -e "CREATE USER 'nextcloud'@'localhost' IDENTIFIED BY 'welcome01';"
+    mysql -e "GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost';"
+    mysql -e "FLUSH PRIVILEGES;"
+fi
+
+if [ "$cms" == "shiftexec" ]; then
+    
+fi
+
+if [ "$cms" == "phpmyadmin" ]; then
+    apt install zip -y
+    cd /var/www/html
+    wget https://files.phpmyadmin.net/phpMyAdmin/5.1.0/phpMyAdmin-5.1.0-all-languages.zip
+    unzip phpMyAdmin-5.1.0-all-languages.zip
+    rm phpMyAdmin-5.1.0-all-languages.zip
+    mv phpMyAdmin-5.1.0-all-languages $2
+fi

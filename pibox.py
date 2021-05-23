@@ -330,29 +330,241 @@ def webapps ():
         print ("In a webbrowser go to http://"+ip+"/"+folder)
         print ("At the database secion use the following.")
         print ()
-        print ("Host Name: localhost")
-        print ("Username: Joomla")
-        print ("Password: welcome01")
-        print ("Database Name: Joomla")
-        print ("Table Prefix: (Anything you like)") 
+        print ("Database name: drupal")
+        print ("Database username: drupal")
+        print ("Database password")
         print ()
         timer
         return webapps() 
 
     elif choice == "4":    
+        location = "empty"
+        print()
+        print ("What is the name of the folder where you are goining to install wordpress? Use . to install it in to the root folder of the webserver.")
+        folder = input()
+        
+        if folder == ".":
+            location = "/var/www/html"
+
+        else:
+            location = "/var/www/html/" + folder
+        
+        foldercheck = os.path.isdir('/var/www/html/'+folder)
+
+        if foldercheck == True:
+            print ()
+            print ("Folder is not empty. If you proceed than the target folder will be removed. (y/n)")
+            proceed = input()
+
+            if proceed == "y" or "yes":
+                os.system ("rm -r " +location)
+            
+            elif proceed == "n" or "no":
+                print ()
+                print ("Nothing is removed. Please try agian.")
+                timer
+                return webapps()
+
+            else:
+                print ("Nothing is removed. Please try agian.")
+                timer
+                return webapps()                         
+        cms = "owncloud"
+        dir()
+        os.system ("./scripts/install/LAMP.bash")
+        cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
+        os.system(cmd)
         print ()
+        ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] 
+        if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), 
+        s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, 
+        socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
+
+        print ("Owncloud is installed.")
+        print ("In a webbrowser go to http://"+ip+"/"+folder)
+        print ("At the database secion use the following.")
+        print ()
+        print ("Database name: drupal")
+        print ("Database username: drupal")
+        print ("Database password")
+        print ()
+        timer
+        return webapps() 
 
     elif choice == "5":    
+        location = "empty"
+        print()
+        print ("What is the name of the folder where you are goining to install wordpress? Use . to install it in to the root folder of the webserver.")
+        folder = input()
+        
+        if folder == ".":
+            location = "/var/www/html"
+
+        else:
+            location = "/var/www/html/" + folder
+        
+        foldercheck = os.path.isdir('/var/www/html/'+folder)
+
+        if foldercheck == True:
+            print ()
+            print ("Folder is not empty. If you proceed than the target folder will be removed. (y/n)")
+            proceed = input()
+
+            if proceed == "y" or "yes":
+                os.system ("rm -r " +location)
+            
+            elif proceed == "n" or "no":
+                print ()
+                print ("Nothing is removed. Please try agian.")
+                timer
+                return webapps()
+
+            else:
+                print ("Nothing is removed. Please try agian.")
+                timer
+                return webapps()                         
+        cms = "nextcloud"
+        dir()
+        os.system ("./scripts/install/LAMP.bash")
+        cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
+        os.system(cmd)
         print ()
+        ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] 
+        if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), 
+        s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, 
+        socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
+
+        print ("Nextcloud is installed.")
+        print ("In a webbrowser go to http://"+ip+"/"+folder+"/setup.php")
+        print ("For the install directory enter a . to install it")
+        print ("At the database secion use the following.")
+        print ()
+        print ()
+        timer
+        return webapps() 
 
     elif choice == "6":    
+        location = "empty"
+        print()
+        print ("What is the name of the folder where you are goining to install wordpress? Use . to install it in to the root folder of the webserver.")
+        folder = input()
+        
+        if folder == ".":
+            location = "/var/www/html"
+
+        else:
+            location = "/var/www/html/" + folder
+        
+        foldercheck = os.path.isdir('/var/www/html/'+folder)
+
+        if foldercheck == True:
+            print ()
+            print ("Folder is not empty. If you proceed than the target folder will be removed. (y/n)")
+            proceed = input()
+
+            if proceed == "y" or "yes":
+                os.system ("rm -r " +location)
+            
+            elif proceed == "n" or "no":
+                print ()
+                print ("Nothing is removed. Please try agian.")
+                timer
+                return webapps()
+
+            else:
+                print ("Nothing is removed. Please try agian.")
+                timer
+                return webapps()                         
+        cms = "shiftexec"
+        dir()
+        os.system ("./scripts/install/LAMP.bash")
+        cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
+        os.system(cmd)
         print ()
+        ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] 
+        if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), 
+        s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, 
+        socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
+
+        print ("Nextcloud is installed.")
+        print ("In a webbrowser go to http://"+ip+"/"+folder)
+        print ()
+        print ()
+        timer
+        return webapps() 
 
     elif choice == "7":    
+        location = "empty"
+        print()
+        print ("What is the name of the folder where you are goining to install wordpress? Use . to install it in to the root folder of the webserver.")
+        folder = input()
+        
+        if folder == ".":
+            location = "/var/www/html"
+
+        else:
+            location = "/var/www/html/" + folder
+        
+        foldercheck = os.path.isdir('/var/www/html/'+folder)
+
+        if foldercheck == True:
+            print ()
+            print ("Folder is not empty. If you proceed than the target folder will be removed. (y/n)")
+            proceed = input()
+
+            if proceed == "y" or "yes":
+                os.system ("rm -r " +location)
+            
+            elif proceed == "n" or "no":
+                print ()
+                print ("Nothing is removed. Please try agian.")
+                timer
+                return webapps()
+
+            else:
+                print ("Nothing is removed. Please try agian.")
+                timer
+                return webapps()                         
+        
+              
+        cms = "phpmyadmin"
+        dir()
+        os.system ("./scripts/install/LAMP.bash")
+        cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
+        os.system(cmd)
         print ()
+        ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] 
+        if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), 
+        s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, 
+        socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
+
+        print ()
+        print ("Do you want to connect phpMyAdmin to antoher MySQL/MariaDB server? If you don't know the answer press n. (y/n")
+        remote = input ()
+
+        if remote == "y":
+            print ()
+            print ("What will be the domainname/IP address?")
+            address = input ()
+
+            config_location = location + "/config.sample.inc.php"
+            config_location_new = location + "/config.inc.php"
+            fin = open(config_location, "rt")
+            fout = open(config_location_new, "wt")
+            for line in fin:
+                fout.write(line.replace('localhost', address))
+            fin.close()
+            fout.close()
+        
+        print ()
+        print ("phpMyAdmin is installed.")
+        print ("In a webbrowser go to http://"+ip+"/"+folder)
+        print ()
+        timer
+        return webapps() 
 
     elif choice == "8":    
-        print ()
+        return webserver ()
 
     else:
         print ()

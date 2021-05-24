@@ -125,6 +125,7 @@ def webserver():
     print ()
     print ("5 - Return")
     print ("6 - Exit")
+    print ()
 
     choice = input()
 
@@ -208,24 +209,28 @@ def websettings ():
     choice = input()
 
     if choice == "1":
+        print ()
         os.system ("systemctl start apache2")
         print ("The webserver is starting...")
         timer ()
         websettings ()
     
     elif choice == "2":
+        print ()
         os.system ("systemctl restart apache2")
         print ("The webserver is restarting...")
         timer ()
         websettings ()
     
     elif choice == "3":
+        print ()
         os.system ("systemctl stop apache2")
         print ("The webserver has been stopped")
         timer ()
         websettings ()
     
     elif choice == "4":
+        print ()
         print ("Which port do you want to user for the unsecure connection? (HTTP, default 80)")
         http = input()
         print ()
@@ -233,7 +238,7 @@ def websettings ():
         https = input()
         print ()
         print ("Are you sure that you want to user these settings? (y/n")
-        commit = input
+        commit = input ()
         
         if commit != "y":
             print ("Operation canceld...")
@@ -276,6 +281,7 @@ def websettings ():
         choice = input ()
 
         if choice == "a":
+            print ()
             print ("Are you sure that you want to remove everything? (y/n)")
             choice = input ()
 
@@ -314,7 +320,7 @@ def websettings ():
             
             else:
                 print ("Input not reconized...")
-                timer
+                timer ()
                 websettings ()
             
             print ("Do you want to remove the databaseserver? (y/n)")

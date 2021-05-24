@@ -234,16 +234,24 @@ def websettings ():
         print ("Which port do you want to user for the unsecure connection? (HTTP, default 80)")
         http = input()
         print ()
-        print ("Which port do you want to user for the secured connection? (HTTPS, default 443")
+        print ("Which port do you want to user for the secured connection? (HTTPS, default 443)")
         https = input()
         print ()
         print ("Are you sure that you want to user these settings? (y/n")
         commit = input ()
         
-        if commit != "y":
+        if commit == "y":
+            print ()
+
+        elif commit == "n":
             print ("Operation canceld...")
             timer ()
             websettings ()
+            
+        else:
+            print ("Operation canceld...")
+            timer ()
+            websettings ()            
 
         os.system ("mv /etc/apache2/ports.conf /etc/apache2/ports.backup")
         os.system ("cp /etc/apache2/ports.original /etc/apache2/ports.conf")

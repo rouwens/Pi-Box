@@ -210,19 +210,19 @@ def websettings ():
     if choice == "1":
         os.system ("systemctl start apache2")
         print ("The webserver is starting...")
-        timer
+        timer ()
         websettings ()
     
     elif choice == "2":
         os.system ("systemctl restart apache2")
         print ("The webserver is restarting...")
-        timer
+        timer ()
         websettings ()
     
     elif choice == "3":
         os.system ("systemctl stop apache2")
         print ("The webserver has been stopped")
-        timer
+        timer ()
         websettings ()
     
     elif choice == "4":
@@ -237,7 +237,7 @@ def websettings ():
         
         if commit != "y":
             print ("Operation canceld...")
-            timer
+            timer ()
             websettings ()
 
         os.system ("mv /etc/apache2/ports.conf /etc/apache2/ports.backup")
@@ -263,7 +263,7 @@ def websettings ():
 
         os.system("systemctl restart apache2")
         print ("Ports are changed")
-        timer
+        timer ()
         websettings ()
 
     
@@ -281,7 +281,7 @@ def websettings ():
 
             if choice != "y":
                 print ("Operation canceled")
-                timer
+                timer ()
                 websettings ()
             
             os.system ("apt purge apache2-* php* mariadb-* -y ")
@@ -292,7 +292,7 @@ def websettings ():
             if choice != "y":
                 print ()
                 print ("The files are not removed...")
-                timer
+                timer ()
                 websettings ()
             
             os.system ("rm -r /var/www/html/*")
@@ -329,37 +329,37 @@ def websettings ():
             
             else:
                 wronginput ()
-                timer
+                timer ()
                 websettings ()
 
             toberemoved = apache2 + mariadb
 
             if toberemoved == "00":
                 print ("Nothing is removed.")
-                timer 
+                timer ()
                 websettings ()
 
             elif toberemoved == "10":
                 os.system ("apt purge apache2-* php* -y")
                 print ("The webserver is removed.")
-                timer
+                timer ()
                 websettings ()
 
             elif toberemoved == "01":
                 os.system ("apt purge mariadb-* -y")
                 print ("The databaseserver is removed.")
-                timer
+                timer ()
                 websettings
                 
             elif toberemoved == "11":
                 os.system ("apt purge apache2-* php* mariadb-* -y")
                 print ("The webserver and database are removed.")
-                timer
+                timer ()
                 websettings        
         
         else:
             wronginput ()
-            timer
+            timer ()
             websettings ()
     
     elif choice == "7":

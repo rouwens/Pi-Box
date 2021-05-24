@@ -139,7 +139,7 @@ def webserver():
         webapps()
     
     elif choice == "3":
-        print ("What's the name of the folder that you want to remove? A . stands for everything.")
+        print ("What's the name of the folder that you want to remove? A '.' stands for everything. Press on the 'c' key to cancel this operation.")
         folder = input ()
 
         if folder == ".":
@@ -155,6 +155,12 @@ def webserver():
                 timer
             return webserver ()
         
+        elif folder == "c":
+            print ()
+            print ("Operation canceld...")
+            timer ()
+            webserver ()
+            
         print ("Are you sure that you want to remove " + folder + "? (y/n)")
         choice = input()
 
@@ -247,7 +253,7 @@ def websettings ():
             print ("Operation canceld...")
             timer ()
             websettings ()
-            
+
         else:
             print ("Operation canceld...")
             timer ()

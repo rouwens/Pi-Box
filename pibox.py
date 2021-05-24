@@ -18,6 +18,11 @@ def timer ():
 def dir ():
     os.system ("cd /opt/Pi-Box/")
 
+# Het standaard rigelte bij verkeerde input
+def wronginput ():
+    print ()
+    print ("Input not recognized. Please try it agian...")
+
 #Het start menu
 def start ():
     print ("#   _______  ___     _______  _______  __   __ ")
@@ -46,7 +51,7 @@ def start ():
         exit()
     
     else:
-        print ("Input not recognized. Please do it again...")
+        wronginput ()
         time.sleep(2)
         return start()
 
@@ -93,7 +98,7 @@ def software():
         exit()
     
     else:
-        print ("Input not recognized. Please do it again...")
+        wronginput ()
         time.sleep(2)
         return software()
 
@@ -173,7 +178,8 @@ def webserver():
         exit()
     
     elif choice == ("install"):
-        os.system ("apt update -y && apt install apache2 -y")
+        dir()
+        os.system ("./scripts/install/LAMP.bash")
         print ()
         print ("De webserver is installed")
         timer()
@@ -181,7 +187,7 @@ def webserver():
     
     else:
         print ()
-        print ("Input not reconized. Please try agian...")
+        wronginput ()
         timer()
         return webserver()
 
@@ -193,11 +199,12 @@ def websettings ():
     print ("2 - Restart service")
     print ("3 - Stop service")
     print ()
-    print ("5 - Change webserver port")
-    print ("6 - HTTPS")
-    print ("7 - Uninstall")
+    print ("4 - Change webserver port")
+    print ("5 - HTTPS")
+    print ("6 - Uninstall")
     print ()
-    print ("8 - Return")
+    print ("7 - Return")
+    print ()
     choice = input()
 
     if choice == "1":
@@ -213,26 +220,150 @@ def websettings ():
         websettings ()
     
     elif choice == "3":
-        print ()
+        os.system ("systemctl stop apache2")
+        print ("The webserver has been stopped")
+        timer
+        websettings ()
     
     elif choice == "4":
+        print ("Which port do you want to user for the unsecure connection? (HTTP, default 80)")
+        http = input()
         print ()
+        print ("Which port do you want to user for the secured connection? (HTTPS, default 443")
+        https = input()
+        print ()
+        print ("Are you sure that you want to user these settings? (y/n")
+        commit = input
+        
+        if commit != "y":
+            print ("Operation canceld...")
+            timer
+            websettings ()
+
+        os.system ("mv /etc/apache2/ports.conf /etc/apache2/ports.backup")
+        os.system ("cp /etc/apache2/ports.original /etc/apache2/ports.conf")
+
+        config_location = "/etc/apache2/ports.conf"
+        config_location_new = "/etc/apache2/ports.temp"
+        fin = open(config_location, "rt")
+        fout = open(config_location_new, "wt")
+        for line in fin:
+            fout.write(line.replace('80', http))
+        fin.close()
+        fout.close()
+
+        config_location = "/etc/apache2/ports.temp"
+        config_location_new = "/etc/apache2/ports.conf"
+        fin = open(config_location, "rt")
+        fout = open(config_location_new, "wt")
+        for line in fin:
+            fout.write(line.replace('443', https))
+        fin.close()
+        fout.close()
+
+        os.system("systemctl restart apache2")
+        print ("Ports are changed")
+        timer
+        websettings ()
+
     
     elif choice == "5":
         print ()
     
     elif choice == "6":
         print ()
+        print ("Do you want to uninstall the webserver and database? Press than on the 'a' key. If you want to keep the webserver nor database, press than on the 'k' key")
+        choice = input ()
+
+        if choice == "a":
+            print ("Are you sure that you want to remove everything? (y/n)")
+            choice = input ()
+
+            if choice != "y":
+                print ("Operation canceled")
+                timer
+                websettings ()
+            
+            os.system ("apt purge apache2-* php* mariadb-* -y ")
+            print ()
+            print ("All software is removed. The application files that are in the web folder are still there. Do you also remove these? (y/n)")
+            choice = input ()
+
+            if choice != "y":
+                print ()
+                print ("The files are not removed...")
+                timer
+                websettings ()
+            
+            os.system ("rm -r /var/www/html/*")
+            print ()
+            print ("Everythings is removed...")
+            websettings ()
+        
+        elif choice == "k":
+            print ()
+            print ("Do you want to remove the webserver? (y/n")
+            choice = input ()
+            print ()
+
+            if choice == "y":
+                apache2 = "1"
+            
+            if choice == "n":
+                apache2 = "0"
+            
+            else:
+                print ("Input not reconized...")
+                timer
+                websettings ()
+            
+            print ("Do you want to remove the databaseserver? (y/n)")
+            choice = input ()
+            print ()
+
+            if choice == "y":
+                mariadb = "1"
+            
+            if choice == "n":
+                mariadb = "0"
+            
+            else:
+                wronginput ()
+                timer
+                websettings ()
+
+            toberemoved = apache2 + mariadb
+
+            if toberemoved == "00":
+                print ("Nothing is removed.")
+                timer 
+                websettings ()
+
+            elif toberemoved == "10":
+                os.system ("apt purge apache2-* php* -y")
+                print ("The webserver is removed.")
+                timer
+                websettings ()
+
+            elif toberemoved == "01":
+                os.system ("apt purge mariadb-* -y")
+                print ("The databaseserver is removed.")
+                timer
+                websettings
+                
+            elif toberemoved == "11":
+                os.system ("apt purge apache2-* php* mariadb-* -y")
+                print ("The webserver and database are removed.")
+                timer
+                websettings        
+        
+        else:
+            wronginput ()
+            timer
+            websettings ()
     
     elif choice == "7":
-        print ()
-    
-    elif choice == "8":
-        print ()
-
-
-    
-
+        return webserver()   
 
 def webapps ():
     print ()
@@ -342,7 +473,7 @@ def webapps ():
                 return webapps()                         
         cms = "joomla"
         dir()
-        os.system ("./scripts/install/LAMP.bash")
+        #os.system ("./scripts/install/LAMP.bash")
         cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
         os.system(cmd)
         print ()
@@ -398,7 +529,7 @@ def webapps ():
                 return webapps()                         
         cms = "drupal"
         dir()
-        os.system ("./scripts/install/LAMP.bash")
+        #os.system ("./scripts/install/LAMP.bash")
         cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
         os.system(cmd)
         print ()
@@ -452,7 +583,7 @@ def webapps ():
                 return webapps()                         
         cms = "owncloud"
         dir()
-        os.system ("./scripts/install/LAMP.bash")
+        #os.system ("./scripts/install/LAMP.bash")
         cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
         os.system(cmd)
         print ()
@@ -507,7 +638,7 @@ def webapps ():
                 return webapps()                         
         cms = "nextcloud"
         dir()
-        os.system ("./scripts/install/LAMP.bash")
+        #os.system ("./scripts/install/LAMP.bash")
         cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
         os.system(cmd)
         print ()
@@ -563,7 +694,7 @@ def webapps ():
                 return webapps()                         
         cms = "shiftexec"
         dir()
-        os.system ("./scripts/install/LAMP.bash")
+        #os.system ("./scripts/install/LAMP.bash")
         cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
         os.system(cmd)
         print ()
@@ -633,7 +764,7 @@ def webapps ():
               
         cms = "phpmyadmin"
         dir()
-        os.system ("./scripts/install/LAMP.bash")
+        #os.system ("./scripts/install/LAMP.bash")
         cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
         os.system(cmd)
         print ()

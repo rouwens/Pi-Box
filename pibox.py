@@ -288,6 +288,28 @@ def websettings ():
     
     elif choice == "5":
         print ()
+        print ("Would you like to use a selfsigned certificate (s) or a free one from Certbot (c)? (s/c")
+        print ("If you use one from Cerbot. Be sure that port 80 and 443 are open and you need a domainname.")
+        print ()
+        choice = input ()
+
+        if choice == "s":
+            print()
+        
+        elif choice == "c":
+            print ()
+            dir()
+            os.system ("bash ./scripts/certbot.bash")
+            print()
+            print ("Certificate is installed")
+            timer()
+            websettings()
+
+        
+        else:
+            print("Choice not recognized. Please try agian...")
+            timer()
+            websettings()
     
     elif choice == "6":
         print ()

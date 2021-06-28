@@ -1056,7 +1056,7 @@ def transmission(ip):
     ip = ip
     status = "empty"
     # Checken of de map bestaat
-    check = os.path.isdir('/etc/transmission')
+    check = os.path.isdir('/etc/transmission-daemon')
 
     if check != True:
         print ()
@@ -1078,17 +1078,17 @@ def transmission(ip):
     print ()
 
     if choice == "1":
-        os.system("systemctl start transmission.service")
+        os.system("systemctl start transmission-daemon.service")
         print ("transmission is starting up...")
         timer()
 
     elif choice == "2":
-        os.system("systemctl stop transmission.service")
+        os.system("systemctl stop transmission-daemon.service")
         print ("transmission is stopping...")
         timer()
 
     elif choice == "3":
-        os.system("systemctl restart transmission.service")
+        os.system("systemctl restart transmission-daemon.service")
         print ("transmission is restarting...")
         timer()
     
@@ -1105,7 +1105,7 @@ def transmission(ip):
             if choice == "y":
                 os.system("apt purge transmission* -y")
                 os.system("apt autoremove -y")
-                os.system("rm -r /etc/transmission")
+                os.system("rm -r /etc/transmission-daemon")
                 clear()
                 print ("transmission is removed...")
                 timer ()
@@ -1128,7 +1128,7 @@ def transmission(ip):
     
     elif choice == "install":
         clear()
-        print ("Do you want to install transmission? (y/n)")
+        print ("Do you want to install Transmission? (y/n)")
         choice = input()
         print ()
 

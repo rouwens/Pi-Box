@@ -6,3 +6,4 @@ os system python variabel meegeven - https://www.daniweb.com/programming/softwar
 IP adres verkrijgen - https://www.w3resource.com/python-exercises/python-basic-exercise-55.php
 Tekst in een tekst vervangen - https://pythonexamples.org/python-replace-string-in-file/
 Mysql command vanuit CLI - https://electrictoolbox.com/run-single-mysql-query-command-line/
+Transmission install - https://linuxconfig.org/how-to-set-up-transmission-daemon-on-a-raspberry-pi-and-control-it-via-web-interface

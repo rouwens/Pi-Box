@@ -1029,8 +1029,10 @@ def jellyfin (ip):
 
         if choice == "y":
             os.system ("/opt/Pi-Box/scripts/install/jellyfin.bash")
+            clear()
             print ("Jellyfin is installed. In a webbrowser go to http://" + ip + ":8096")
             input("Press Enter to continue...")
+            return jellyfin(ip)
 
         if choice == "n":
             print ("Operation cancelled...")
@@ -1048,6 +1050,129 @@ def jellyfin (ip):
         return jellyfin(ip)     
 
     return jellyfin(ip)
-    
 
+def transmission(ip):
+    clear ()
+    ip = ip
+    status = "empty"
+    # Checken of de map bestaat
+    check = os.path.isdir('/etc/transmission')
+
+    if check != True:
+        print ()
+        print ("Transmission is not installed. Enter install to begin the installation")
+        status = Fore.WHITE + "not installed" + Style.RESET_ALL
+
+    print ("Transmission")
+    print ("------------------")
+    print ("Status: "+ status)
+    print ()
+    print ("1 - Start Transmission")
+    print ("2 - Stop Transmission")
+    print ("3 - Restart Transmission")
+    print ("4 - Remove Transmission")
+    print ()
+    print ("5 - Return")
+    print ("6 - Exit")
+    choice = input()
+    print ()
+
+    if choice == "1":
+        os.system("systemctl start transmission.service")
+        print ("transmission is starting up...")
+        timer()
+
+    elif choice == "2":
+        os.system("systemctl stop transmission.service")
+        print ("transmission is stopping...")
+        timer()
+
+    elif choice == "3":
+        os.system("systemctl restart transmission.service")
+        print ("transmission is restarting...")
+        timer()
+    
+    elif choice == "4":
+        clear()
+        print ("Do you want to remove transmission? (y/n)")
+        choice = input()
+
+        if choice == "y":
+            clear()
+            print ("Are you really sure? There is no going back after this point. (y/n)")
+            choice = input ()
+
+            if choice == "y":
+                os.system("apt purge transmission* -y")
+                os.system("apt autoremove -y")
+                os.system("rm -r /etc/transmission")
+                clear()
+                print ("transmission is removed...")
+                timer ()
+
+            elif choice == "n":
+                clear()
+                print ("Operation cancelled...")
+                timer()
+            
+            else:
+                clear()
+                print("Input not recognized. Nothing is touched")
+                timer()
+            
+    elif choice == "5":
+        software(ip)
+
+    elif choice == "6":
+        exit()
+    
+    elif choice == "install":
+        clear()
+        print ("Do you want to install transmission? (y/n)")
+        choice = input()
+        print ()
+
+        if choice == "y":
+            os.system ("apt update")
+            os.system ("apt install transmission-daemon -y")
+            os.system ("systemctl stop transmission-daemon")
+
+            fin = open("/etc/transmission-daemon/settings.json", "rt")
+            #output file to write the result to
+            fout = open("/etc/transmission-daemon/settings.json.temp", "wt")
+            #for each line in the input file
+            for line in fin:
+                #read replace the string and write to output file
+                fout.write(line.replace('"rpc-whitelist-enabled": true,', '"rpc-whitelist-enabled": false,'))
+            #close input and output files
+            fin.close()
+            fout.close()
+
+            os.system ("/etc/transmission-daemon/settings.json")
+            os.system ("mv /etc/transmission-daemon/settings.json.temp /etc/transmission-daemon/settings.json")
+            os.system ("systemctl start transmission-daemon")
+            clear()
+            print ("Transmission is installed. In a webbrowser go to http://" + ip + ":9091")
+            print ("Use transmission for the username and password")
+            print ()
+            input("Press Enter to continue...")
+            return transmission(ip)
+
+        if choice == "n":
+            print ("Operation cancelled...")
+            timer()
+         
+        else:
+            print ("input not recognized..." )
+            timer()
+        
+        return transmission(ip) 
+
+    else:
+        wronginput()
+        timer()
+        return transmission(ip)     
+
+    return transmission(ip)
+    
 start(ip)

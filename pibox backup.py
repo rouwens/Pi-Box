@@ -4,11 +4,6 @@ from colorama import Fore, Style
 import os
 
 
-# Het scherm schoon vegen
-
-def clear (): 
-    os.system("clear")
-
 # Het standaard riegeltje wanneer het programma moet stoppen
 def exit ():
     print ()
@@ -28,16 +23,9 @@ def wronginput ():
     print ()
     print ("Input not recognized. Please try it agian...")
 
-# Het verkrijgen van het IP adres van de machine
-ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] 
-if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), 
-s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, 
-socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
-
 #Het start menu
-def start (ip):
-    clear()
-    ip = ip
+os.system("clear")
+def start ():
     print ("#   _______  ___     _______  _______  __   __ ")
     print ("#  |       ||   |   |  _    ||       ||  |_|  |")
     print ("#  |    _  ||   |   | |_|   ||   _   ||       |")
@@ -58,7 +46,7 @@ def start (ip):
         system()
     
     elif choice == "2":
-        software(ip)
+        software()
     
     elif choice == "3":
         exit()
@@ -73,9 +61,8 @@ def system():
     return start()
 
 # Hoofdmenu van het onderdeel software
-def software(ip):
-    clear()
-    ip = ip
+def software():
+    print()
     print ("Software")
     print ("----------")
     print ()
@@ -93,10 +80,10 @@ def software(ip):
         print()
     
     elif choice == "2":
-        webserver (ip) 
+        webserver () 
 
     elif choice == "3":
-        adguard (ip)
+        print ()
     
     elif choice == "4":
         print ()
@@ -117,9 +104,7 @@ def software(ip):
         return software()
 
 # Het menu van de webserver
-def webserver(ip):
-    clear()
-    ip = ip
+def webserver():
     status = "empty"
     # Checken of de map bestaat
     check = os.path.isdir('/etc/apache2')
@@ -129,6 +114,7 @@ def webserver(ip):
         print ("The webserver is not installed. Enter install to begin the installation")
         status = Fore.WHITE + "not installed" + Style.RESET_ALL
 
+    print ()
     print ("Webserver")
     print ("------------------")
     print ("Status: "+ status)
@@ -151,7 +137,7 @@ def webserver(ip):
         return webserver()
        
     elif choice == "2":
-        webapps(ip)
+        webapps()
     
     elif choice == "3":
         print ("What's the name of the folder that you want to remove? A '.' stands for everything. Press on the 'c' key to cancel this operation.")
@@ -215,7 +201,7 @@ def webserver(ip):
 
 # Het menu van de instellingen voor de webserver
 def websettings ():
-    clear ()
+    print ()
     print ("Websettings")
     print ("-----------")
     print ("1 - Start service")
@@ -424,9 +410,8 @@ def websettings ():
         return webserver()   
 
 # Het menu voor de web applicaties
-def webapps (ip):
-    ip = ip
-    clear()
+def webapps ():
+    print ()
     print ("WebApps")
     print ("-------")
     print ("Select an app that you want to install")
@@ -469,18 +454,22 @@ def webapps (ip):
                 print ()
                 print ("Nothing is removed. Please try agian.")
                 timer
-                return webapps(ip)
+                return webapps()
 
             else:
                 print ("Nothing is removed. Please try agian.")
                 timer
-                return webapps(ip)                         
+                return webapps()                         
         cms = "wordpress"
         dir()
         os.system ("./scripts/install/LAMP.bash")
         cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
         os.system(cmd)
         print ()
+        ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] 
+        if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), 
+        s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, 
+        socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
 
         print ("Wordpress is installed.")
         print ("In a webbrowser go to http://"+ip+"/"+folder)
@@ -493,7 +482,7 @@ def webapps (ip):
         print ("Table Prefix: (Anything you like)") 
         print ()
         timer
-        return webapps (ip)
+        return webapps ()
 
     elif choice == "2":    
         location = "empty"
@@ -526,13 +515,17 @@ def webapps (ip):
             else:
                 print ("Nothing is removed. Please try agian.")
                 timer
-                return webapps(ip)                         
+                return webapps()                         
         cms = "joomla"
         dir()
         #os.system ("./scripts/install/LAMP.bash")
         cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
         os.system(cmd)
         print ()
+        ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] 
+        if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), 
+        s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, 
+        socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
 
         print ("Joomla is installed.")
         print ("In a webbrowser go to http://"+ip+"/"+folder)
@@ -545,7 +538,7 @@ def webapps (ip):
         print ("Table Prefix: (Anything you like)") 
         print ()
         timer
-        return webapps(ip) 
+        return webapps() 
 
     elif choice == "3":    
         location = "empty"
@@ -578,13 +571,17 @@ def webapps (ip):
             else:
                 print ("Nothing is removed. Please try agian.")
                 timer
-                return webapps(ip)                         
+                return webapps()                         
         cms = "drupal"
         dir()
         #os.system ("./scripts/install/LAMP.bash")
         cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
         os.system(cmd)
         print ()
+        ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] 
+        if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), 
+        s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, 
+        socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
 
         print ("Joomla is installed.")
         print ("In a webbrowser go to http://"+ip+"/"+folder)
@@ -595,7 +592,7 @@ def webapps (ip):
         print ("Database password")
         print ()
         timer
-        return webapps(ip) 
+        return webapps() 
 
     elif choice == "4":    
         location = "empty"
@@ -628,13 +625,17 @@ def webapps (ip):
             else:
                 print ("Nothing is removed. Please try agian.")
                 timer
-                return webapps(ip)                         
+                return webapps()                         
         cms = "owncloud"
         dir()
         #os.system ("./scripts/install/LAMP.bash")
         cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
         os.system(cmd)
         print ()
+        ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] 
+        if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), 
+        s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, 
+        socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
 
         print ("Owncloud is installed.")
         print ("In a webbrowser go to http://"+ip+"/"+folder)
@@ -646,7 +647,7 @@ def webapps (ip):
         print ("Password database: welcome01")
         print ("Name database: owncloud")
         timer
-        return webapps(ip) 
+        return webapps() 
 
     elif choice == "5":    
         location = "empty"
@@ -679,13 +680,17 @@ def webapps (ip):
             else:
                 print ("Nothing is removed. Please try agian.")
                 timer
-                return webapps(ip)                         
+                return webapps()                         
         cms = "nextcloud"
         dir()
         #os.system ("./scripts/install/LAMP.bash")
         cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
         os.system(cmd)
         print ()
+        ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] 
+        if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), 
+        s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, 
+        socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
 
         print ("Nextcloud is installed.")
         print ("In a webbrowser go to http://"+ip+"/"+folder+"/setup.php")
@@ -698,7 +703,7 @@ def webapps (ip):
         print ("Password database: welcome01")
         print ("Name database: nextcloud")
         timer
-        return webapps(ip) 
+        return webapps() 
 
     elif choice == "6":    
         location = "empty"
@@ -731,13 +736,17 @@ def webapps (ip):
             else:
                 print ("Nothing is removed. Please try agian.")
                 timer
-                return webapps(ip)                         
+                return webapps()                         
         cms = "shiftexec"
         dir()
         #os.system ("./scripts/install/LAMP.bash")
         cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
         os.system(cmd)
         print ()
+        ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] 
+        if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), 
+        s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, 
+        socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
 
         username = "shiftexec"
         password = "welcome01"
@@ -762,7 +771,7 @@ def webapps (ip):
         print ("Shiftexec is installed.")
         print ("In a webbrowser go to http://"+ip+"/"+folder)
         timer
-        return webapps(ip) 
+        return webapps() 
 
     elif choice == "7":    
         location = "empty"
@@ -795,7 +804,7 @@ def webapps (ip):
             else:
                 print ("Nothing is removed. Please try agian.")
                 timer
-                return webapps(ip)                         
+                return webapps()                         
         
               
         cms = "phpmyadmin"
@@ -804,6 +813,10 @@ def webapps (ip):
         cmd = "./scripts/web-apps.bash %s %s"%(cms, location)
         os.system(cmd)
         print ()
+        ip = [l for l in ([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] 
+        if not ip.startswith("127.")][:1], [[(s.connect(('8.8.8.8', 53)), 
+        s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, 
+        socket.SOCK_DGRAM)]][0][1]]) if l][0][0]
 
         print ()
         print ("Do you want to connect phpMyAdmin to antoher MySQL/MariaDB server? If you don't know the answer press n. (y/n")
@@ -828,7 +841,7 @@ def webapps (ip):
         print ("In a webbrowser go to http://"+ip+"/"+folder)
         print ()
         timer
-        return webapps(ip) 
+        return webapps() 
 
     elif choice == "8":    
         return webserver ()
@@ -839,12 +852,10 @@ def webapps (ip):
         print ()
         print ("Choice not reconized. Please try again...")
         timer()
-        return webapps(ip)        
+        return webapps()        
 
 # Het menu voor de adblocker
-def adguard (ip):
-    clear ()
-    ip = ip
+def adguard ():
     status = "empty"
     # Checken of de map bestaat
     check = os.path.isdir('/opt/AdGuardHome')
@@ -854,6 +865,7 @@ def adguard (ip):
         print ("The webserver is not installed. Enter install to begin the installation")
         status = Fore.WHITE + "not installed" + Style.RESET_ALL
 
+    print ()
     print ("Adguard Home")
     print ("------------------")
     print ("Status: "+ status)
@@ -861,85 +873,21 @@ def adguard (ip):
     print ("1 - Start Adguard Home")
     print ("2 - Stop Adguard Home")
     print ("3 - Restart Adguard Home")
-    print ("4 - Remove Adguard Home")
-    print ()
-    print ("5 - Return")
-    print ("6 - Exit")
+    print ("4")
 
     choice = input()
 
     if choice == "1":
-        os.system ("systemctl start AdGuardHome.service")
-        return adguard(ip)
+        print()
 
     elif choice == "2":
-        os.system ("systemctl stop AdGuardHome.service")
-        return adguard(ip)
+        print()
 
     elif choice == "3":
-        os.system ("systemctl restart AdGuardHome.service")
-    
-    elif choice == "4":
-        clear()
-        print ("Do you want to remove Adguard Home? (y/n)")
         print()
-        choice = input()
-
-        if choice == "y":
-            clear()
-            print ("Are you really sure? There is no going back after this point. (y/n)")
-            print ()
-            choice = input ()
-
-            if choice == "y":
-                os.system("/opt/AdGuardHome/AdGuardHome -s uninstall")
-                os.system("rm -r /opt/AdGuardHome")
-                clear()
-                print ("Adguard Home is removed...")
-                timer ()
-
-            elif choice == "n":
-                clear()
-                print ("Operation cancelled...")
-                timer()
-            
-            else:
-                clear()
-                print("Input not recognized. Nothing is touched")
-                timer()
-            
-            adguard(ip)
     
-    elif choice == "5":
-        return software (ip)
-    
-    elif choice == "6":
-        exit()
-    
-    elif choice == "install":
-        clear()
-        print ("Do you want to install Adguard Home? (y/n)")
-        print ()
-        choice = input()
-
-        if choice == "y":
-            os.system("curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v")
-            os.system("systemctl daemon-reload")
-            clear()
-            print ("In a webbrowser go to http://" + ip + ":3000 to finish the installation")
-            input("Press Enter to continue...")
-            adguard(ip)
-
-        elif choice == "n":
-            print ("Operation cancelled")
-            timer()
-            return adguard(ip)
-
     else:
         wronginput()
-        timer()
-        return adguard (ip)
+        return 
 
-
-
-start(ip)
+start()

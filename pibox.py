@@ -967,8 +967,8 @@ def jellyfin (ip):
     print ("3 - Restart Jellyfin")
     print ("4 - Remove Jellyfin")
     print ()
-    print ("4 - Return")
-    print ("5 - Exit")
+    print ("5 - Return")
+    print ("6 - Exit")
     choice = input()
     print ()
 
@@ -1028,8 +1028,7 @@ def jellyfin (ip):
         print ()
 
         if choice == "y":
-            dir()
-            os.system ("./scripts/install/jellyfin.bash")
+            os.system ("/opt/Pi-Box/scripts/install/jellyfin.bash")
             print ("Jellyfin is installed. In a webbrowser go to http://" + ip + ":8096")
             input("Press Enter to continue...")
 

@@ -2,21 +2,21 @@
     ip = ip
     status = "empty"
     # Checken of de map bestaat
-    check = os.path.isdir('/etc/transmission')
+    check = os.path.isdir('/etc/vpn')
 
     if check != True:
         print ()
-        print ("transmission is not installed. Enter install to begin the installation")
+        print ("vpn is not installed. Enter install to begin the installation")
         status = Fore.WHITE + "not installed" + Style.RESET_ALL
 
-    print ("transmission")
+    print ("vpn")
     print ("------------------")
     print ("Status: "+ status)
     print ()
-    print ("1 - Start transmission")
-    print ("2 - Stop transmission")
-    print ("3 - Restart transmission")
-    print ("4 - Remove transmission")
+    print ("1 - Start vpn")
+    print ("2 - Stop vpn")
+    print ("3 - Restart vpn")
+    print ("4 - Remove vpn")
     print ()
     print ("5 - Return")
     print ("6 - Exit")
@@ -24,23 +24,23 @@
     print ()
 
     if choice == "1":
-        os.system("systemctl start transmission.service")
-        print ("transmission is starting up...")
+        os.system("systemctl start vpn.service")
+        print ("vpn is starting up...")
         timer()
 
     elif choice == "2":
-        os.system("systemctl stop transmission.service")
-        print ("transmission is stopping...")
+        os.system("systemctl stop vpn.service")
+        print ("vpn is stopping...")
         timer()
 
     elif choice == "3":
-        os.system("systemctl restart transmission.service")
-        print ("transmission is restarting...")
+        os.system("systemctl restart vpn.service")
+        print ("vpn is restarting...")
         timer()
     
     elif choice == "4":
         clear()
-        print ("Do you want to remove transmission? (y/n)")
+        print ("Do you want to remove vpn? (y/n)")
         choice = input()
 
         if choice == "y":
@@ -49,11 +49,11 @@
             choice = input ()
 
             if choice == "y":
-                os.system("apt purge transmission* -y")
+                os.system("apt purge vpn* -y")
                 os.system("apt autoremove -y")
-                os.system("rm -r /etc/transmission")
+                os.system("rm -r /etc/vpn")
                 clear()
-                print ("transmission is removed...")
+                print ("vpn is removed...")
                 timer ()
 
             elif choice == "n":
@@ -74,16 +74,16 @@
     
     elif choice == "install":
         clear()
-        print ("Do you want to install transmission? (y/n)")
+        print ("Do you want to install vpn? (y/n)")
         choice = input()
         print ()
 
         if choice == "y":
-            os.system ("/opt/Pi-Box/scripts/install/transmission.bash")
+            os.system ("/opt/Pi-Box/scripts/install/vpn.bash")
             clear()
-            print ("transmission is installed. In a webbrowser go to http://" + ip + ":8096")
+            print ("vpn is installed. In a webbrowser go to http://" + ip + ":8096")
             input("Press Enter to continue...")
-            return transmission(ip)
+            return vpn(ip)
 
         if choice == "n":
             print ("Operation cancelled...")
@@ -93,12 +93,12 @@
             print ("input not recognized..." )
             timer()
         
-        return transmission(ip) 
+        return vpn(ip) 
 
     else:
         wronginput()
         timer()
-        return transmission(ip)     
+        return vpn(ip)     
 
-    return transmission(ip)
+    return vpn(ip)
     

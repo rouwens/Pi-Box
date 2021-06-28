@@ -1,18 +1,104 @@
-    if choice == "1":
+    clear ()
+    ip = ip
+    status = "empty"
+    # Checken of de map bestaat
+    check = os.path.isdir('/etc/transmission')
+
+    if check != True:
         print ()
-        print ("This will install the full Linux Apache2 Mariadb PHP (LAMP) stack")
-        print ("Do you want to continue? (y/n")
-        answer = input()
-        if answer == "y":
-            dir()
-            os.system ("bash ./scripts/install/LAMP.bash")
-            print ("LAMP stack is installed")
+        print ("transmission is not installed. Enter install to begin the installation")
+        status = Fore.WHITE + "not installed" + Style.RESET_ALL
+
+    print ("transmission")
+    print ("------------------")
+    print ("Status: "+ status)
+    print ()
+    print ("1 - Start transmission")
+    print ("2 - Stop transmission")
+    print ("3 - Restart transmission")
+    print ("4 - Remove transmission")
+    print ()
+    print ("5 - Return")
+    print ("6 - Exit")
+    choice = input()
+    print ()
+
+    if choice == "1":
+        os.system("systemctl start transmission.service")
+        print ("transmission is starting up...")
+        timer()
+
+    elif choice == "2":
+        os.system("systemctl stop transmission.service")
+        print ("transmission is stopping...")
+        timer()
+
+    elif choice == "3":
+        os.system("systemctl restart transmission.service")
+        print ("transmission is restarting...")
+        timer()
+    
+    elif choice == "4":
+        clear()
+        print ("Do you want to remove transmission? (y/n)")
+        choice = input()
+
+        if choice == "y":
+            clear()
+            print ("Are you really sure? There is no going back after this point. (y/n)")
+            choice = input ()
+
+            if choice == "y":
+                os.system("apt purge transmission* -y")
+                os.system("apt autoremove -y")
+                os.system("rm -r /etc/transmission")
+                clear()
+                print ("transmission is removed...")
+                timer ()
+
+            elif choice == "n":
+                clear()
+                print ("Operation cancelled...")
+                timer()
+            
+            else:
+                clear()
+                print("Input not recognized. Nothing is touched")
+                timer()
+            
+    elif choice == "5":
+        software(ip)
+
+    elif choice == "6":
+        exit()
+    
+    elif choice == "install":
+        clear()
+        print ("Do you want to install transmission? (y/n)")
+        choice = input()
+        print ()
+
+        if choice == "y":
+            os.system ("/opt/Pi-Box/scripts/install/transmission.bash")
+            clear()
+            print ("transmission is installed. In a webbrowser go to http://" + ip + ":8096")
+            input("Press Enter to continue...")
+            return transmission(ip)
+
+        if choice == "n":
+            print ("Operation cancelled...")
             timer()
-            return webserver()
-        elif answer == "n":
-            return webserver()
+         
         else:
-            print ()
-            print ("Unknow input. Please try again...")
+            print ("input not recognized..." )
             timer()
-            return webserver()
+        
+        return transmission(ip) 
+
+    else:
+        wronginput()
+        timer()
+        return transmission(ip)     
+
+    return transmission(ip)
+    

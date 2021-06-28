@@ -105,7 +105,7 @@ def software(ip):
         adguard (ip)
     
     elif choice == "4":
-        print ()
+        jellyfin (ip)
     
     elif choice == "5":
         print()
@@ -1032,7 +1032,7 @@ def jellyfin (ip):
             os.system ("./scripts/install/jellyfin.bash")
             print ("Jellyfin is installed. In a webbrowser go to http://" + ip + ":8096")
             input("Press Enter to continue...")
-            
+
         if choice == "n":
             print ("Operation cancelled...")
             timer()

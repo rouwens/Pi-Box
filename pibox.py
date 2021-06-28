@@ -1,5 +1,6 @@
 import time
 import socket
+import sys
 from colorama import Fore, Style
 import os
 
@@ -13,7 +14,7 @@ def exit ():
     print ()
     print ("Bye, bye")
     time.sleep(2)
-    exit
+    sys.exit()
 
 # Standaard tijd om te wachten tussen print regels
 def timer ():

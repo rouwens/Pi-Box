@@ -5,7 +5,6 @@ import os
 
 
 # Het scherm schoon vegen
-
 def clear (): 
     os.system("clear")
 
@@ -79,14 +78,21 @@ def software(ip):
     print ("Software")
     print ("----------")
     print ()
-    print ("1 - View installed/running software")
-    print ("2 - Webserver")
-    print ("3 - Adguard Home (Adblocker)")
-    print ("4 - Jellyfin (mediaserver)")
-    print ("5 - Plex (mediaserver)")
+    print ("1  - View installed/running software")
+    print ()
+    print ("2  - Webserver")
+    print ("3  - Adguard Home       (Adblocker)")
+    print ("4  - Jellyfin           (mediaserver)")
+    print ("5  - Transmission       (torrentserver)")
+    print ("6  - Unifi controller")
+    print ("7  - Kodi               (Mediacenter)")
+    print ("8  - Minecraft server   (MineOS)")
+    print ("9  - VPN                (OpenVPN)")
+    print ("10 - Magic Mirror")
+    print ("11 - Fileserver         (Samba)")
     print ("")
-    print ("6 - Return to main menu")
-    print ("7 - Exit")
+    print ("12 - Return to main menu")
+    print ("13 - Exit")
     choice = input()
 
     if choice == "1":
@@ -104,11 +110,11 @@ def software(ip):
     elif choice == "5":
         print()
     
-    elif choice == "6":
+    elif choice == "12":
         print ()
         return(software)
     
-    elif choice == "7":
+    elif choice == "13":
         exit()
     
     else:
@@ -851,7 +857,7 @@ def adguard (ip):
 
     if check != True:
         print ()
-        print ("The webserver is not installed. Enter install to begin the installation")
+        print ("AdGuard Home is not installed. Enter install to begin the installation")
         status = Fore.WHITE + "not installed" + Style.RESET_ALL
 
     print ("Adguard Home")
@@ -882,13 +888,11 @@ def adguard (ip):
     elif choice == "4":
         clear()
         print ("Do you want to remove Adguard Home? (y/n)")
-        print()
         choice = input()
 
         if choice == "y":
             clear()
             print ("Are you really sure? There is no going back after this point. (y/n)")
-            print ()
             choice = input ()
 
             if choice == "y":
@@ -908,7 +912,7 @@ def adguard (ip):
                 print("Input not recognized. Nothing is touched")
                 timer()
             
-            adguard(ip)
+            return adguard(ip)
     
     elif choice == "5":
         return software (ip)
@@ -919,16 +923,18 @@ def adguard (ip):
     elif choice == "install":
         clear()
         print ("Do you want to install Adguard Home? (y/n)")
-        print ()
         choice = input()
+        clear()
 
         if choice == "y":
+            os.system("apt update -y")
+            os.system("apt install curl -y ")
             os.system("curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v")
             os.system("systemctl daemon-reload")
             clear()
             print ("In a webbrowser go to http://" + ip + ":3000 to finish the installation")
             input("Press Enter to continue...")
-            adguard(ip)
+            return adguard(ip)
 
         elif choice == "n":
             print ("Operation cancelled")
@@ -940,6 +946,109 @@ def adguard (ip):
         timer()
         return adguard (ip)
 
+def jellyfin (ip):
+    clear ()
+    ip = ip
+    status = "empty"
+    # Checken of de map bestaat
+    check = os.path.isdir('/etc/jellyfin')
 
+    if check != True:
+        print ()
+        print ("Jellyfin is not installed. Enter install to begin the installation")
+        status = Fore.WHITE + "not installed" + Style.RESET_ALL
+
+    print ("Jellyfin")
+    print ("------------------")
+    print ("Status: "+ status)
+    print ()
+    print ("1 - Start Jellyfin")
+    print ("2 - Stop Jellyfin")
+    print ("3 - Restart Jellyfin")
+    print ("4 - Remove Jellyfin")
+    print ()
+    print ("4 - Return")
+    print ("5 - Exit")
+    choice = input()
+    print ()
+
+    if choice == "1":
+        os.system("systemctl start jellyfin.service")
+        print ("Jellyfin is starting up...")
+        timer()
+
+    elif choice == "2":
+        os.system("systemctl stop jellyfin.service")
+        print ("Jellyfin is stopping...")
+        timer()
+
+    elif choice == "3":
+        os.system("systemctl restart jellyfin.service")
+        print ("Jellyfin is restarting...")
+        timer()
+    
+    elif choice == "4":
+        clear()
+        print ("Do you want to remove Jellyfin? (y/n)")
+        choice = input()
+
+        if choice == "y":
+            clear()
+            print ("Are you really sure? There is no going back after this point. (y/n)")
+            choice = input ()
+
+            if choice == "y":
+                os.system("apt purge jellyfin* -y")
+                os.system("apt autoremove -y")
+                os.system("rm -r /etc/jellyfin")
+                clear()
+                print ("Jellyfin is removed...")
+                timer ()
+
+            elif choice == "n":
+                clear()
+                print ("Operation cancelled...")
+                timer()
+            
+            else:
+                clear()
+                print("Input not recognized. Nothing is touched")
+                timer()
+            
+    elif choice == "5":
+        software(ip)
+
+    elif choice == "6":
+        exit()
+    
+    elif choice == "install":
+        clear()
+        print ("Do you want to install Jellyfin? (y/n)")
+        choice = input()
+        print ()
+
+        if choice == "y":
+            dir()
+            os.system ("./scripts/install/jellyfin.bash")
+            print ("Jellyfin is installed. In a webbrowser go to http://" + ip + ":8096")
+            input("Press Enter to continue...")
+            
+        if choice == "n":
+            print ("Operation cancelled...")
+            timer()
+         
+        else:
+            print ("input not recognized..." )
+            timer()
+        
+        return jellyfin(ip) 
+
+    else:
+        wronginput()
+        timer()
+        return jellyfin(ip)     
+
+    return jellyfin(ip)
+    
 
 start(ip)

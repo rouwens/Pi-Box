@@ -13,6 +13,7 @@ def exit ():
     print ()
     print ("Bye, bye")
     time.sleep(2)
+    exit
 
 # Standaard tijd om te wachten tussen print regels
 def timer ():
@@ -85,14 +86,15 @@ def software(ip):
     print ("4  - Jellyfin           (mediaserver)")
     print ("5  - Transmission       (torrentserver)")
     print ("6  - Unifi controller")
-    print ("7  - Kodi               (Mediacenter)")
-    print ("8  - Minecraft server   (MineOS)")
+    print ("7  - Kodi*              (Mediacenter)")
+    print ("8  - Minecraft server*  (MineOS)")
     print ("9  - VPN                (OpenVPN)")
     print ("10 - Magic Mirror")
     print ("11 - Fileserver         (Samba)")
+    print ("12 - Music library      (Subsonic)")
     print ("")
-    print ("12 - Return to main menu")
-    print ("13 - Exit")
+    print ("13 - Return to main menu")
+    print ("14 - Exit")
     choice = input()
 
     if choice == "1":
@@ -110,11 +112,23 @@ def software(ip):
     elif choice == "5":
         transmission(ip)
     
-    elif choice == "12":
+    elif choice == "6":
+        unifi(ip)
+    
+    elif choice == "7":
+        kodi(ip)
+    
+    elif choice == "8":
+        minecraft(ip)
+    
+    elif choice == "9":
+        vpn(ip)
+    
+    elif choice == "13":
         print ()
         return(software)
     
-    elif choice == "13":
+    elif choice == "14":
         exit()
     
     else:
@@ -1079,22 +1093,22 @@ def transmission(ip):
 
     if choice == "1":
         os.system("systemctl start transmission-daemon.service")
-        print ("transmission is starting up...")
+        print ("Transmission is starting up...")
         timer()
 
     elif choice == "2":
         os.system("systemctl stop transmission-daemon.service")
-        print ("transmission is stopping...")
+        print ("Transmission is stopping...")
         timer()
 
     elif choice == "3":
         os.system("systemctl restart transmission-daemon.service")
-        print ("transmission is restarting...")
+        print ("Transmission is restarting...")
         timer()
     
     elif choice == "4":
         clear()
-        print ("Do you want to remove transmission? (y/n)")
+        print ("Do you want to remove Transmission? (y/n)")
         choice = input()
 
         if choice == "y":
@@ -1107,7 +1121,7 @@ def transmission(ip):
                 os.system("apt autoremove -y")
                 os.system("rm -r /etc/transmission-daemon")
                 clear()
-                print ("transmission is removed...")
+                print ("Transmission is removed...")
                 timer ()
 
             elif choice == "n":
@@ -1174,5 +1188,222 @@ def transmission(ip):
         return transmission(ip)     
 
     return transmission(ip)
+
+def unifi (ip):
+    clear ()
+    ip = ip
+    status = "empty"
+    # Checken of de map bestaat
+    check = os.path.isdir('/etc/unifi')
+
+    if check != True:
+        print ()
+        print ("The Unifi Controller is not installed. Enter install to begin the installation")
+        status = Fore.WHITE + "not installed" + Style.RESET_ALL
+
+    print ("Unifi Controller")
+    print ("------------------")
+    print ("Status: "+ status)
+    print ()
+    print ("1 - Start Unifi Controller")
+    print ("2 - Stop Unifi Controller")
+    print ("3 - Restart Unifi Controller")
+    print ("4 - Remove Unifi Controller")
+    print ()
+    print ("5 - Return")
+    print ("6 - Exit")
+    choice = input()
+    print ()
+
+    if choice == "1":
+        os.system("systemctl start unifi.service")
+        print ("unifi is starting up...")
+        timer()
+
+    elif choice == "2":
+        os.system("systemctl stop unifi.service")
+        print ("unifi is stopping...")
+        timer()
+
+    elif choice == "3":
+        os.system("systemctl restart unifi.service")
+        print ("unifi is restarting...")
+        timer()
+    
+    elif choice == "4":
+        clear()
+        print ("Do you want to remove the Unifi Controller? (y/n)")
+        choice = input()
+
+        if choice == "y":
+            clear()
+            print ("Are you really sure? There is no going back after this point. (y/n)")
+            choice = input ()
+
+            if choice == "y":
+                os.system("apt purge unifi* -y")
+                os.system("apt autoremove -y")
+                os.system("rm -r /etc/unifi")
+                clear()
+                print ("The Unifi controller is removed...")
+                timer ()
+
+            elif choice == "n":
+                clear()
+                print ("Operation cancelled...")
+                timer()
+            
+            else:
+                clear()
+                print("Input not recognized. Nothing is touched")
+                timer()
+            
+    elif choice == "5":
+        software(ip)
+
+    elif choice == "6":
+        exit()
+    
+    elif choice == "install":
+        clear()
+        print ("Do you want to install the Unifi Controller? (y/n)")
+        choice = input()
+        print ()
+
+        if choice == "y":
+            os.system ("rm unifi-latest.sh &> /dev/null; wget https://get.glennr.nl/unifi/install/install_latest/unifi-latest.sh && bash unifi-latest.sh")
+            clear()
+            print ("The Unifi Controller is installed. In a webbrowser go to https://" + ip + ":8443")
+            input("Press Enter to continue...")
+            return unifi(ip)
+
+        if choice == "n":
+            print ("Operation cancelled...")
+            timer()
+         
+        else:
+            print ("input not recognized..." )
+            timer()
+        
+        return unifi(ip) 
+
+    else:
+        wronginput()
+        timer()
+        return unifi(ip)     
+
+    return unifi(ip)
+
+def kodi(ip):
+    print ()
+
+def minecraft(ip):
+    print ()
+
+def vpn (ip):
+    clear ()
+    ip = ip
+    status = "empty"
+    # Checken of de map bestaat
+    check = os.path.isdir('/etc/openvpn')
+
+    if check != True:
+        print ()
+        print ("The VPN is not installed. Enter install to begin the installation")
+        status = Fore.WHITE + "not installed" + Style.RESET_ALL
+
+    print ("VPN")
+    print ("------------------")
+    print ("Status: "+ status)
+    print ()
+    print ("1 - Start VPN")
+    print ("2 - Stop VPN")
+    print ("3 - Restart VPN")
+    print ("4 - Remove VPN")
+    print ()
+    print ("5 - Return")
+    print ("6 - Exit")
+    choice = input()
+    print ()
+
+    if choice == "1":
+        os.system("systemctl start openvpn.service")
+        print ("vpn is starting up...")
+        timer()
+
+    elif choice == "2":
+        os.system("systemctl stop openvpn.service")
+        print ("vpn is stopping...")
+        timer()
+
+    elif choice == "3":
+        os.system("systemctl restart openvpn.service")
+        print ("vpn is restarting...")
+        timer()
+    
+    elif choice == "4":
+        clear()
+        print ("Do you want to remove vpn? (y/n)")
+        choice = input()
+
+        if choice == "y":
+            clear()
+            print ("Are you really sure? There is no going back after this point. (y/n)")
+            choice = input ()
+
+            if choice == "y":
+                os.system("apt purge openvpn* -y")
+                os.system("apt autoremove -y")
+                os.system("rm -r /etc/openvpn")
+                clear()
+                print ("The VPN is removed...")
+                timer ()
+
+            elif choice == "n":
+                clear()
+                print ("Operation cancelled...")
+                timer()
+            
+            else:
+                clear()
+                print("Input not recognized. Nothing is touched")
+                timer()
+            
+    elif choice == "5":
+        software(ip)
+
+    elif choice == "6":
+        exit()
+    
+    elif choice == "install":
+        clear()
+        print ("Do you want to install the VPN? (y/n)")
+        choice = input()
+        print ()
+
+        if choice == "y":
+            os.system ("cd /opt/Pi-Box/scripts && https://github.com/Nyr/openvpn-install/blob/master/openvpn-install.sh && mv openvpn-install.sh openvpn.sh")
+            os.system ("/opt/Pi-Box/scripts/openvpn.sh")
+            clear()
+            print ("The VPN server is installed.")
+            input("Press Enter to continue...")
+            return vpn(ip)
+
+        if choice == "n":
+            print ("Operation cancelled...")
+            timer()
+         
+        else:
+            print ("input not recognized..." )
+            timer()
+        
+        return vpn(ip) 
+
+    else:
+        wronginput()
+        timer()
+        return vpn(ip)     
+
+    return vpn(ip)
     
 start(ip)

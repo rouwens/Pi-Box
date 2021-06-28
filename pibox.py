@@ -108,7 +108,7 @@ def software(ip):
         jellyfin (ip)
     
     elif choice == "5":
-        print()
+        transmission(ip)
     
     elif choice == "12":
         print ()

@@ -1383,7 +1383,7 @@ def vpn (ip):
         print ()
 
         if choice == "y":
-            os.system ("cd /opt/Pi-Box/scripts && wget https://github.com/Nyr/openvpn-install/blob/master/openvpn-install.sh && mv openvpn-install.sh openvpn.sh")
+            os.system ("cd /opt/Pi-Box/scripts && wget https://raw.githubusercontent.com/Nyr/openvpn-install/master/openvpn-install.sh && mv openvpn-install.sh openvpn.sh")
             os.system ("chmod +x /opt/Pi-Box/scripts/openvpn.sh")
             os.system ("/opt/Pi-Box/scripts/openvpn.sh")
             clear()

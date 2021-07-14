@@ -2,21 +2,21 @@
     ip = ip
     status = "empty"
     # Checken of de map bestaat
-    check = os.path.isdir('/etc/vpn')
+    check = os.path.isdir('/etc/kodi')
 
     if check != True:
         print ()
-        print ("vpn is not installed. Enter install to begin the installation")
+        print ("kodi is not installed. Enter install to begin the installation")
         status = Fore.WHITE + "not installed" + Style.RESET_ALL
 
-    print ("vpn")
+    print ("kodi")
     print ("------------------")
     print ("Status: "+ status)
     print ()
-    print ("1 - Start vpn")
-    print ("2 - Stop vpn")
-    print ("3 - Restart vpn")
-    print ("4 - Remove vpn")
+    print ("1 - Start kodi")
+    print ("2 - Stop kodi")
+    print ("3 - Restart kodi")
+    print ("4 - Remove kodi")
     print ()
     print ("5 - Return")
     print ("6 - Exit")
@@ -24,23 +24,23 @@
     print ()
 
     if choice == "1":
-        os.system("systemctl start vpn.service")
-        print ("vpn is starting up...")
+        os.system("systemctl start kodi.service")
+        print ("kodi is starting up...")
         timer()
 
     elif choice == "2":
-        os.system("systemctl stop vpn.service")
-        print ("vpn is stopping...")
+        os.system("systemctl stop kodi.service")
+        print ("kodi is stopping...")
         timer()
 
     elif choice == "3":
-        os.system("systemctl restart vpn.service")
-        print ("vpn is restarting...")
+        os.system("systemctl restart kodi.service")
+        print ("kodi is restarting...")
         timer()
     
     elif choice == "4":
         clear()
-        print ("Do you want to remove vpn? (y/n)")
+        print ("Do you want to remove kodi? (y/n)")
         choice = input()
 
         if choice == "y":
@@ -49,11 +49,11 @@
             choice = input ()
 
             if choice == "y":
-                os.system("apt purge vpn* -y")
+                os.system("apt purge kodi* -y")
                 os.system("apt autoremove -y")
-                os.system("rm -r /etc/vpn")
+                os.system("rm -r /etc/kodi")
                 clear()
-                print ("vpn is removed...")
+                print ("kodi is removed...")
                 timer ()
 
             elif choice == "n":
@@ -74,16 +74,16 @@
     
     elif choice == "install":
         clear()
-        print ("Do you want to install vpn? (y/n)")
+        print ("Do you want to install kodi? (y/n)")
         choice = input()
         print ()
 
         if choice == "y":
-            os.system ("/opt/Pi-Box/scripts/install/vpn.bash")
+            os.system ("/opt/Pi-Box/scripts/install/kodi.bash")
             clear()
-            print ("vpn is installed. In a webbrowser go to http://" + ip + ":8096")
+            print ("kodi is installed. In a webbrowser go to http://" + ip + ":8096")
             input("Press Enter to continue...")
-            return vpn(ip)
+            return kodi(ip)
 
         if choice == "n":
             print ("Operation cancelled...")
@@ -93,12 +93,12 @@
             print ("input not recognized..." )
             timer()
         
-        return vpn(ip) 
+        return kodi(ip) 
 
     else:
         wronginput()
         timer()
-        return vpn(ip)     
+        return kodi(ip)     
 
-    return vpn(ip)
+    return kodi(ip)
     

@@ -3,7 +3,7 @@ import socket
 import sys
 from colorama import Fore, Style
 import os
-
+import getpass
 
 # Het scherm schoon vegen
 def clear (): 
@@ -90,12 +90,13 @@ def software(ip):
     print ("7  - Kodi*              (Mediacenter)")
     print ("8  - Minecraft server*  (MineOS)")
     print ("9  - VPN                (OpenVPN)")
-    print ("10 - Magic Mirror")
-    print ("11 - Fileserver         (Samba)")
-    print ("12 - Music library      (Subsonic)")
+    print ("10 - Magic Mirror*")
+    print ("11 - Fileserver*        (Samba)")
+    print ("12 - Music library*     (Subsonic)")
+    print ("13 - Photo gallery*")
     print ("")
-    print ("13 - Return to main menu")
-    print ("14 - Exit")
+    print ("14 - Return to main menu")
+    print ("15 - Exit")
     choice = input()
 
     if choice == "1":
@@ -125,11 +126,11 @@ def software(ip):
     elif choice == "9":
         vpn(ip)
     
-    elif choice == "13":
+    elif choice == "14":
         print ()
         return(software)
     
-    elif choice == "14":
+    elif choice == "15":
         exit()
     
     else:
@@ -1296,7 +1297,117 @@ def unifi (ip):
     return unifi(ip)
 
 def kodi(ip):
+    clear ()
+    ip = ip
+    status = "empty"
+    # Checken of de map bestaat
+    check = os.path.isdir('/etc/kodi')
+
+    if check != True:
+        print ()
+        print ("Kodi is not installed. Enter install to begin the installation")
+        status = Fore.WHITE + "Not Installed" + Style.RESET_ALL
+    else:
+        status = Fore.WHITE + "Installed" + Style.RESET_ALL
+
+    print ("Kodi")
+    print ("------------------")
+    print ("Status: "+ status)
     print ()
+    print ("1 - Start Kodi")
+    print ("2 - Start Kodi on startup")
+    print ("3 - Stop Kodi on startup")
+    print ("4 - Remove kodi")
+    print ()
+    print ("5 - Return")
+    print ("6 - Exit")
+    choice = input()
+    print ()
+
+    if choice == "1":
+        os.system("systemctl start kodi.service")
+        print ("kodi is starting up...")
+        timer()
+
+    elif choice == "2":
+        os.system("systemctl stop kodi.service")
+        print ("kodi is stopping...")
+        timer()
+
+    elif choice == "3":
+        os.system("systemctl restart kodi.service")
+        print ("kodi is restarting...")
+        timer()
+    
+    elif choice == "4":
+        clear()
+        print ("Do you want to remove kodi? (y/n)")
+        choice = input()
+
+        if choice == "y":
+            clear()
+            print ("Are you really sure? There is no going back after this point. (y/n)")
+            choice = input ()
+
+            if choice == "y":
+                os.system("apt purge kodi* -y")
+                os.system("apt autoremove -y")
+                os.system("rm -r /etc/kodi")
+                clear()
+                print ("kodi is removed...")
+                timer ()
+
+            elif choice == "n":
+                clear()
+                print ("Operation cancelled...")
+                timer()
+            
+            else:
+                clear()
+                print("Input not recognized. Nothing is touched")
+                timer()
+            
+    elif choice == "5":
+        software(ip)
+
+    elif choice == "6":
+        exit()
+    
+    elif choice == "install":
+        clear()
+        print ("Do you want to install Kodi? (y/n)")
+        choice = input()
+        print ()
+
+        if choice == "y":
+            username = getpass.getuser()
+            os.system ("apt update -y")
+            os.system ("apt install kodi -y")
+            #os.system ("apt install openbox xorg xinit kodi -y")
+            #os.system ("mkdir /home/pi/.config/openbox")
+            #os.system ("echo kodi >> /home/" +username + "/.config/openbox/autostart")
+            clear()
+            print ("kodi is installed and enabled on boot. Press in the menu on the one key or reboot the machine.")
+            input("Press Enter to continue...")
+            return kodi(ip)
+
+        if choice == "n":
+            print ("Operation cancelled...")
+            timer()
+         
+        else:
+            print ("input not recognized..." )
+            timer()
+        
+        return kodi(ip) 
+
+    else:
+        wronginput()
+        timer()
+        return kodi(ip)     
+
+    return kodi(ip)
+    
 
 def minecraft(ip):
     print ()

@@ -7,3 +7,4 @@ IP adres verkrijgen - https://www.w3resource.com/python-exercises/python-basic-e
 Tekst in een tekst vervangen - https://pythonexamples.org/python-replace-string-in-file/
 Mysql command vanuit CLI - https://electrictoolbox.com/run-single-mysql-query-command-line/
 Transmission install - https://linuxconfig.org/how-to-set-up-transmission-daemon-on-a-raspberry-pi-and-control-it-via-web-interface
+Verkrijg gebruikersnaam - https://stackoverflow.com/questions/842059/is-there-a-portable-way-to-get-the-current-username-in-python
